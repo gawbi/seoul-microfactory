@@ -14,20 +14,13 @@ export type TechStatus = 'IN_USE' | 'PLANNED' | 'CONSIDERING'
 export type MediaKind = 'REAL_PHOTO' | 'SIMULATION' | 'CONCEPT' | 'RECONSTRUCTION'
 
 export const STATUS_LABEL: Record<Status, string> = {
-  CONCEPT: 'Concept',
-  IN_DEVELOPMENT: 'In development',
-  VERIFIED: 'Verified',
+  CONCEPT: '구상',
+  IN_DEVELOPMENT: '진행 중',
+  VERIFIED: '검증 완료',
 }
 
 export const TECH_STATUS_LABEL: Record<TechStatus, string> = {
-  IN_USE: 'In use',
-  PLANNED: 'Planned',
-  CONSIDERING: 'Under consideration',
-}
-
-export const MEDIA_KIND_LABEL: Record<MediaKind, string> = {
-  REAL_PHOTO: 'Real photo',
-  SIMULATION: 'Simulation',
-  CONCEPT: 'Concept visual',
-  RECONSTRUCTION: 'Reconstruction',
+  IN_USE: '사용 중',
+  PLANNED: '계획',
+  CONSIDERING: '검토 중',
 }

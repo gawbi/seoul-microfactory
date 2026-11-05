@@ -6,7 +6,7 @@
 export const SITE = {
   name: 'SEOUL MICROFACTORY',
   url: import.meta.env.VITE_SITE_URL || '',
-  repoUrl: '', // 예: https://github.com/<owner>/seoul-microfactory
+  repoUrl: 'https://github.com/gawbi/seoul-microfactory',
   contact: '',
   year: 2026,
 }

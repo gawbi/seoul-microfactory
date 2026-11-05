@@ -1,121 +1,115 @@
 .nav {
   position: fixed;
-  inset: 0 0 auto 0;
+  inset: 0 0 auto;
   z-index: 50;
-  height: var(--nav-h);
-  border-bottom: 1px solid transparent;
+  color: var(--asphalt);
+  background: color-mix(in srgb, var(--shutter) 88%, transparent);
+  backdrop-filter: blur(14px) saturate(1.2);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+  border-bottom: 1px solid var(--rule);
   transition:
-    background 0.3s,
-    border-color 0.3s;
+    background-color 240ms ease,
+    color 240ms ease,
+    border-color 240ms ease;
 }
-.scrolled {
-  background: rgba(7, 11, 18, 0.82);
-  border-bottom-color: var(--line);
-  backdrop-filter: blur(12px) saturate(1.2);
-  -webkit-backdrop-filter: blur(12px) saturate(1.2);
+.nav[data-hero='true'] {
+  color: var(--night-text);
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-bottom-color: transparent;
 }
+
 .inner {
-  height: 100%;
+  height: var(--nav-h);
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 24px;
 }
+
 .brand {
-  display: flex;
-  align-items: center;
-  gap: 11px;
-  font-family: var(--font-mono);
-  font-size: 12.5px;
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  color: var(--white);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  white-space: nowrap;
 }
-.brand svg {
-  flex: none;
-}
+
 .links {
   display: flex;
-  align-items: center;
-  gap: 2px;
+  gap: clamp(18px, 2.4vw, 36px);
 }
 .links a {
   position: relative;
-  padding: 8px 11px;
-  font-family: var(--font-mono);
-  font-size: 11.5px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--muted);
-  transition: color 0.2s;
+  font-size: 15px;
+  font-weight: 560;
+  text-decoration: none;
+  opacity: 0.72;
+  transition: opacity 160ms ease;
 }
-.links a:hover {
-  color: var(--text);
-}
+.links a:hover,
 .links a[aria-current='true'] {
-  color: var(--white);
+  opacity: 1;
 }
 .links a[aria-current='true']::after {
   content: '';
   position: absolute;
-  left: 11px;
-  right: 11px;
-  bottom: 2px;
-  height: 1px;
-  background: var(--cyan);
+  left: 0;
+  right: 0;
+  bottom: -6px;
+  height: 2px;
+  background: var(--tag);
 }
+
 .toggle {
   display: none;
-  width: 40px;
-  height: 40px;
-  place-items: center;
-  border: 1px solid var(--line-2);
+  width: 44px;
+  height: 44px;
+  margin-right: -10px;
+  align-items: center;
+  justify-content: center;
 }
+
 .sheet {
   display: none;
 }
 
-@media (max-width: 1080px) {
+@media (max-width: 760px) {
   .links {
     display: none;
   }
   .toggle {
-    display: grid;
+    display: inline-flex;
   }
   .sheet {
-    position: fixed;
-    inset: var(--nav-h) 0 auto 0;
     display: block;
-    background: rgba(7, 11, 18, 0.97);
-    border-bottom: 1px solid var(--line-2);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    transform-origin: top;
-    transition:
-      opacity 0.22s var(--ease-out),
-      transform 0.22s var(--ease-out),
-      visibility 0.22s;
+    position: absolute;
+    top: var(--nav-h);
+    left: 0;
+    right: 0;
+    background: var(--shutter);
+    border-bottom: 1px solid var(--rule);
+    clip-path: inset(0 0 100% 0);
+    transition: clip-path 260ms var(--ease-out);
   }
-  .sheet[data-open='false'] {
-    opacity: 0;
-    transform: translateY(-8px);
-    visibility: hidden;
+  .sheet[data-open='true'] {
+    clip-path: inset(0 0 0 0);
   }
   .sheet ul {
     padding: 8px var(--gutter) 20px;
   }
   .sheet a {
-    display: flex;
-    justify-content: space-between;
-    padding: 15px 0;
-    border-bottom: 1px solid var(--line);
-    font-family: var(--font-mono);
-    font-size: 13px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--text-2);
+    display: block;
+    padding: 14px 0;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    text-decoration: none;
+    color: var(--asphalt);
+    border-bottom: 1px solid var(--rule);
   }
-  .sheet a[aria-current='true'] {
-    color: var(--cyan);
+  .sheet li:last-child a {
+    border-bottom: 0;
   }
 }

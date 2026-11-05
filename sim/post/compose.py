@@ -20,7 +20,8 @@ for f in os.listdir(tmp):
     os.remove(os.path.join(tmp, f))
 
 ov = {k: Image.open(os.path.join(ovd, f"ov_{k}.png")).convert("RGBA") for k in ["S1", "S2", "S3", "S4", "S5", "S6"]}
-mono = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf", 13) if os.path.exists("/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf") else ImageFont.load_default()
+_PT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "node_modules", "pretendard", "dist", "public", "static", "Pretendard-SemiBold.otf")
+label_font = ImageFont.truetype(_PT, 15) if os.path.exists(_PT) else ImageFont.load_default()
 
 
 def load(i):
@@ -34,15 +35,15 @@ def pip(img, i):
     if not os.path.exists(g):
         return img
     gi = Image.open(g).convert("RGB").resize((416, 234), Image.LANCZOS)
-    x, y = W - 416 - 48, 120
+    x, y = W - 416 - 56, 104
     shadow = Image.new("RGBA", (436, 254), (0, 0, 0, 0))
     ImageDraw.Draw(shadow).rectangle([10, 10, 426, 244], fill=(0, 0, 0, 140))
     img.paste(shadow.filter(ImageFilter.GaussianBlur(8)), (x - 10, y - 10), shadow.filter(ImageFilter.GaussianBlur(8)))
     img.paste(gi, (x, y))
     d = ImageDraw.Draw(img)
-    d.rectangle([x - 1, y - 1, x + 416, y + 234], outline=(95, 212, 240), width=1)
-    d.rectangle([x, y, x + 196, y + 22], fill=(7, 11, 18))
-    d.text((x + 8, y + 4), "GIMBAL CAM · PTZ VIEW", font=mono, fill=(159, 230, 247))
+    d.rectangle([x - 1, y - 1, x + 416, y + 234], outline=(233, 235, 230), width=1)
+    d.rectangle([x, y, x + 132, y + 28], fill=(21, 25, 29))
+    d.text((x + 10, y + 5), "짐벌 카메라 화면", font=label_font, fill=(233, 235, 230))
     return img
 
 

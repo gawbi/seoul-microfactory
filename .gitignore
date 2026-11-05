@@ -7,7 +7,14 @@ dist
 media-src/**/originals/
 
 # Isaac Sim 출력물 (프레임, 로그). 최종 결과만 public/assets/simulation/으로 복사한다.
-sim/output/
+sim/output/*
+# 다시 학습한 Go2 보행 정책(작은 TorchScript 파일)만 저장소에 둔다
+!sim/output/policies/
+sim/output/policies/*
+!sim/output/policies/go2_upright/
+sim/output/policies/go2_upright/*
+!sim/output/policies/go2_upright/policy.pt
+!sim/output/policies/go2_upright/policy.sha256
 
 # 개인 설정 문서
 claude_setup.md

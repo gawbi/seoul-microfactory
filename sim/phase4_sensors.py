@@ -200,6 +200,7 @@ report = {
     "cloud_points_5cm": int(len(cloud)),
     "gimbal_frames": frames_saved,
     "policy_error": go2.error,
+    "walk_policy": go2.policy_name,
 }
 print("[phase4] REPORT " + json.dumps(report), flush=True)
 json.dump(report, open(os.path.join(OUT, "report.json"), "w"), indent=2)

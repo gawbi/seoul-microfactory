@@ -40,25 +40,18 @@ npm run preview   # 빌드 결과 미리보기 http://localhost:4173
 
 `public/assets/README.md`에 넣을 파일 이름과 위치를 정리해 두었습니다. 파일을 넣고 `src/data/media.ts`에서 해당 항목의 `src`를 채우면 자리표시가 실제 사진·영상으로 바뀝니다.
 
-모든 미디어에는 출처 구분 라벨이 붙습니다.
+모든 이미지 캡션 앞에는 출처 종류가 붙습니다: "Isaac Sim 렌더", "실제 사진", "설명용 그림", "재구성 결과".
 
-- `REAL PHOTO`: 실제로 촬영한 사진 (영상은 `Real footage`)
-- `SIMULATION`: Isaac Sim 등에서 렌더링한 화면
-- `CONCEPT VISUAL`: 이해를 돕기 위해 직접 그린 시각화
-- `RECONSTRUCTION`: 실제 수집 데이터로 재구성한 결과
+Go2 실제 사진은 Wikimedia Commons의 CC BY / CC BY-SA 사진이며, 출처는 `public/assets/images/go2/IMAGE_CREDITS.md`에 있습니다.
 
-Go2 사진은 모두 Wikimedia Commons의 CC BY / CC BY-SA 사진이며, 출처는 `public/assets/images/go2/IMAGE_CREDITS.md`에 있습니다.
+## 디자인
 
-## 컨셉 시각화
+장면은 "영업이 끝난 동네 매장에 로봇이 들어가는 밤"입니다. 첫 화면은 Isaac Sim 6.2 패스 트레이싱으로 렌더링한 통로 영상이고, 사이트의 그림은 모두 `sim/phase10_cinematic.py`로 실제 렌더링한 결과입니다.
 
-HERO와 DIGITAL TWIN 섹션의 매장 장면은 실제 스캔 데이터가 아닙니다. `src/visuals/storeModel.ts`에 정의한 8m × 6m 가상 매장에서 Canvas 2D로 그린 것입니다.
-
-- 실사풍 매장 뷰와 포인트 클라우드 뷰가 같은 형상 데이터를 쓰기 때문에 두 화면의 좌표가 일치합니다.
-- 화면 밖에 있거나 탭이 숨겨지면 애니메이션을 멈춥니다.
-- 모바일에서는 점 개수와 픽셀 밀도를 줄입니다.
-- `prefers-reduced-motion` 설정이 켜져 있으면 정지 화면만 보여줍니다.
-
-실제 3D 모델(`.glb`, `.ply` 등)이 생기면 DIGITAL TWIN 뷰어를 Three.js 기반으로 교체할 수 있습니다. 교체 지점은 `src/sections/DigitalTwin.tsx`의 `SceneCanvas` 두 개입니다.
+- 색: 셔터 회색 `#d8dad5` 바탕, 아스팔트 `#1d2125` 글씨, 견적에만 영수증 종이색 `#f4f4f0`, 진행 상태 표시에만 가격표 노랑 `#f3c21b`
+- 글꼴: Pretendard(한글), Archivo Expanded(로고·숫자)
+- 움직임: 첫 화면 영상과 제목이 한 번 올라오는 것 외에는 넣지 않습니다. `prefers-reduced-motion`이면 영상도 멈춥니다.
+- 번호는 실제 순서가 있는 과정 4단계와 로드맵에만 씁니다.
 
 ## GitHub Pages 배포
 
@@ -82,12 +75,11 @@ VITE_BASE=/seoul-microfactory/ npm run build && npx vite preview --base /seoul-m
 src/
   config/site.ts        사이트 설정, asset() 경로 도우미
   data/                 문구·상태·미디어·실험 데이터
-  sections/             페이지 섹션 (Hero, Problem, Solution, Workflow, DigitalTwin, Report, RobotValidation, TechStack, Roadmap, Vision)
-  components/           Navbar, Footer, MediaSlot, 상태 배지 등 공용 UI
-  visuals/              가상 매장 모델, Canvas 렌더러, 평면도, 로봇 팔 도식
+  sections/             페이지 섹션 (Hero, Intro, Process, Film, Report, Evidence, Roadmap)
+  components/           Navbar, Footer, Picture·Film·StatusText 공용 UI
   hooks/                reduced motion, 현재 섹션 감지
   styles/global.css     디자인 토큰과 기본 스타일
-public/assets/          이미지·영상·시뮬레이션 결과·OG 이미지
+public/assets/          cinematic/(시네마틱 렌더), simulation/(데모 영상), 실제 사진, OG 이미지
 media-src/              원본 미디어 (originals/는 git 제외)
 ```
 
@@ -95,12 +87,12 @@ media-src/              원본 미디어 (originals/는 git 제외)
 
 `sim/` 폴더에 NVIDIA Isaac Sim 6.2 시뮬레이션 스크립트가 있습니다. 가상 매장에서 Go2가 걷고 스캔한 뒤 SO-101이 상자를 옮기는 과정을 실행하고, 데모 영상까지 만듭니다. 실행 방법, 결과, 한계는 [`sim/README.md`](sim/README.md)에 정리했습니다.
 
-사이트의 DIGITAL TWIN 섹션에 데모 영상과 스틸 컷이, ROBOT VALIDATION 섹션에 시뮬레이션 실험 기록이 들어가 있습니다. 실제 로봇 검증 지표는 아직 비어 있습니다.
+사이트의 데모 섹션에 53초 영상과 렌더 컷이, 검증 섹션에 시뮬레이션 실험 기록이 들어가 있습니다. 실제 로봇 검증 지표는 아직 비어 있습니다.
 
 ## 앞으로 연결할 지점
 
-- **Isaac Sim 결과물**: 새로 렌더링하면 `public/assets/simulation/`의 같은 파일 이름으로 덮어쓰면 됩니다.
-- **실제 Go2 스캔 데이터**: 포인트 클라우드를 웹용으로 줄인 파일(예: 간략화한 `.ply`, 또는 바이너리 배열)을 만들면, `visuals/cloud.ts`의 `getCloud()`가 그 파일을 읽도록 바꿀 수 있습니다.
+- **Isaac Sim 결과물**: `sim/phase10_cinematic.py`로 다시 렌더링하고 `sim/post/cinematic_assets.py`로 변환하면 `public/assets/cinematic/`이 갱신됩니다.
+- **실제 Go2 스캔 데이터**: 실제 매장을 스캔하면 렌더 컷 옆에 "재구성 결과" 캡션으로 실제 포인트 클라우드를 넣습니다.
 - **실험 결과**: `validation.ts`의 `METRICS` 값과 `EXPERIMENT_LOG`에 측정값을 추가합니다.
 - **견적**: 공급사 단가가 정해지면 `project.ts`의 `REPORT.quote`에 금액을 넣습니다. 모든 항목이 채워지면 합계가 자동으로 계산됩니다.
 

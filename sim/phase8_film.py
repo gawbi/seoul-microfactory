@@ -460,6 +460,7 @@ report = {
     "lift_max_m": round(lifted_max, 4),
     "place_xy_error_m": round(xy_err, 4),
     "go2_policy_error": go2.error,
+    "walk_policy": go2.policy_name,
 }
 print("[film] REPORT " + json.dumps(report), flush=True)
 json.dump({"report": report, "frames": frame_log}, open(os.path.join(OUT, "film_log.json"), "w"))

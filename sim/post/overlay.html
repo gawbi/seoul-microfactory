@@ -1,31 +1,30 @@
 <!doctype html><html><head><meta charset="utf-8"><style>
+/* 사이트와 같은 말투와 글꼴: Pretendard + Archivo Expanded, 가격표 노랑은 표시용으로만 */
 @font-face{font-family:P;src:url(file:///home/ga/seoul/node_modules/pretendard/dist/web/variable/woff2/PretendardVariable.woff2)}
-@font-face{font-family:M;src:url(file:///home/ga/seoul/node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-500-normal.woff2)}
+@font-face{font-family:A;src:url(file:///home/ga/seoul/node_modules/@fontsource-variable/archivo/files/archivo-latin-wdth-normal.woff2);font-stretch:62% 125%}
 *{margin:0;box-sizing:border-box}
-html,body{width:1600px;height:900px;background:transparent;overflow:hidden;font-family:P;color:#e8eef5}
-.top{position:absolute;left:48px;right:48px;top:40px;display:flex;justify-content:space-between;align-items:flex-start}
-.brand{font:500 14px M;letter-spacing:.16em;color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.6)}
-.brand span{color:#5fd4f0;margin-left:14px}
-.chip{display:inline-flex;align-items:center;gap:9px;padding:8px 13px;font:500 12.5px M;letter-spacing:.12em;color:#e8eef5;background:rgba(7,11,18,.62);border:1px solid rgba(150,180,215,.35);backdrop-filter:blur(6px)}
-.chip i{width:7px;height:7px;background:#62dfa9;display:block}
-.chip.concept i{background:none;border:1px solid #5fd4f0}
-.low{position:absolute;left:48px;bottom:46px;max-width:980px}
-.scene{display:flex;align-items:center;gap:14px;font:500 14px M;letter-spacing:.16em;color:#5fd4f0;margin-bottom:12px}
-.scene b{display:block;height:1px;width:46px;background:rgba(95,212,240,.7)}
-h1{font-weight:600;font-size:44px;letter-spacing:-.025em;line-height:1.1;color:#fff;text-shadow:0 2px 18px rgba(0,0,0,.55)}
-p{margin-top:12px;font-size:21px;line-height:1.5;color:#dfe7f0;text-shadow:0 1px 10px rgba(0,0,0,.7);font-weight:500}
-.facts{position:absolute;right:48px;bottom:46px;display:flex;flex-direction:column;align-items:flex-end;gap:7px}
-.fact{font:500 12px M;letter-spacing:.06em;color:#cfd9e4;padding:6px 10px;background:rgba(7,11,18,.55);border-left:2px solid #5fd4f0}
-.fact.warn{border-left-color:#e7b45c}
-.grad{position:absolute;left:0;right:0;bottom:0;height:300px;background:linear-gradient(180deg,transparent,rgba(5,8,13,.72))}
-.gradt{position:absolute;left:0;right:0;top:0;height:140px;background:linear-gradient(0deg,transparent,rgba(5,8,13,.55))}
+html,body{width:1600px;height:900px;background:transparent;overflow:hidden;font-family:P;color:#e9ebe6;word-break:keep-all}
+.grad{position:absolute;left:0;right:0;bottom:0;height:340px;background:linear-gradient(180deg,rgba(12,14,16,0),rgba(12,14,16,.8))}
+.gradt{position:absolute;left:0;right:0;top:0;height:120px;background:linear-gradient(0deg,rgba(12,14,16,0),rgba(12,14,16,.45))}
+.top{position:absolute;left:56px;right:56px;top:44px;display:flex;justify-content:space-between;align-items:center}
+.mark{font:860 15px A;font-stretch:125%;letter-spacing:-.01em;color:#e9ebe6}
+.tag{padding:6px 12px;font-size:15px;font-weight:700;color:#1d2125;background:#f3c21b}
+.low{position:absolute;left:56px;bottom:52px;max-width:900px}
+.step{font-size:17px;font-weight:650;color:#a3aaa9;margin-bottom:12px}
+.step b{color:#e9ebe6;font-weight:700;margin-right:10px}
+h1{font-weight:760;font-size:50px;letter-spacing:-.035em;line-height:1.15;color:#fff}
+p{margin-top:14px;font-size:22px;line-height:1.55;color:#d6d9d4;font-weight:500;max-width:30em}
+.facts{position:absolute;right:56px;bottom:56px;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.fact{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:600;color:#d6d9d4}
+.fact i{width:10px;height:10px;border:1.5px solid #a3aaa9;display:block}
+.fact.warn i{background:#f3c21b;border-color:#f3c21b}
 </style></head><body>
 <div class="gradt"></div><div class="grad"></div>
-<div class="top"><div class="brand">SEOUL MICROFACTORY<span>PHYSICAL AI PLATFORM</span></div><div class="chip" id="chip"><i></i><span id="chipt">SIMULATION · NVIDIA ISAAC SIM 6.2</span></div></div>
-<div class="low"><div class="scene"><span id="no">01</span><b></b><span id="sn">STORE OVERVIEW</span></div><h1 id="t"></h1><p id="c"></p></div>
+<div class="top"><div class="mark">SEOUL MICROFACTORY</div><div class="tag">Isaac Sim 6.2 시뮬레이션</div></div>
+<div class="low"><div class="step"><b id="no"></b><span id="sn"></span></div><h1 id="t"></h1><p id="c"></p></div>
 <div class="facts" id="f"></div>
 <script>
 const q=new URLSearchParams(location.hash.slice(1));
 no.textContent=q.get('no');sn.textContent=q.get('sn');t.textContent=q.get('t');c.textContent=q.get('c');
-(q.get('facts')||'').split('|').filter(Boolean).forEach(s=>{const d=document.createElement('div');d.className='fact'+(s.startsWith('!')?' warn':'');d.textContent=s.replace(/^!/,'');f.appendChild(d)});
+(q.get('facts')||'').split('|').filter(Boolean).forEach(s=>{const d=document.createElement('div');d.className='fact'+(s.startsWith('!')?' warn':'');d.innerHTML='<i></i>';d.append(s.replace(/^!/,''));f.appendChild(d)});
 </script></body></html>

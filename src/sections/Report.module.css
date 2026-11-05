@@ -1,208 +1,160 @@
 .grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
-  gap: clamp(28px, 4vw, 64px);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 30rem);
+  gap: 56px clamp(40px, 7vw, 128px);
   align-items: start;
 }
-.doc {
+
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  position: sticky;
+  top: calc(var(--nav-h) + 48px);
+}
+.lead {
+  max-width: 32rem;
+  font-size: var(--t-lead);
+  color: var(--asphalt-2);
+}
+.basis {
+  max-width: 32rem;
+  border-top: 1px solid var(--rule);
+}
+.basis li {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+/* 영수증 */
+.paperWrap {
+  filter: drop-shadow(0 18px 28px rgba(29, 33, 37, 0.16)) drop-shadow(0 2px 3px rgba(29, 33, 37, 0.12));
+}
+.paper {
   position: relative;
-  border: 1px solid var(--line-2);
-  background: linear-gradient(180deg, var(--surface), var(--bg-2));
-  box-shadow: 0 30px 80px -40px rgba(0, 0, 0, 0.8);
-}
-.docHead {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-  padding: 18px 22px;
-  border-bottom: 1px solid var(--line);
-}
-.docTitle {
-  display: grid;
-  gap: 4px;
-}
-.docTitle strong {
-  font-family: var(--font-mono);
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  color: var(--white);
-}
-.docTitle span {
-  font-size: 12.5px;
-  color: var(--muted);
-}
-.block {
-  padding: 20px 22px;
-  border-bottom: 1px solid var(--line);
-}
-.block:last-child {
-  border-bottom: 0;
-}
-.blockTitle {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 14px;
-  color: var(--text-2);
-}
-.blockTitle span:first-child {
-  color: var(--cyan);
-}
-.kv {
-  display: grid;
-  grid-template-columns: 96px minmax(0, 1fr);
-  gap: 8px 16px;
-  font-size: 14px;
-}
-.kv dt {
-  color: var(--muted);
-}
-.kv dd {
-  margin: 0;
-  color: var(--text);
-}
-.robots {
-  display: grid;
-  gap: 8px;
-}
-.robot {
-  display: grid;
-  grid-template-columns: 22px minmax(0, 1fr) auto;
-  gap: 2px 12px;
-  align-items: baseline;
-  padding: 12px 14px;
-  border: 1px solid var(--line);
-  background: var(--bg-2);
-}
-.robot:first-child {
-  border-color: rgba(95, 212, 240, 0.45);
-  background: var(--cyan-a);
-}
-.rank {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--cyan);
-}
-.robot b {
+  padding: 36px 32px 48px;
+  background: var(--receipt);
   font-size: 15px;
-  font-weight: 600;
-  color: var(--white);
+  line-height: 1.55;
+  /* 아래쪽을 영수증처럼 톱니로 자른다 */
+  --tooth: 10px;
+  mask:
+    conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50% / calc(var(--tooth) * 2) 100%;
+  -webkit-mask:
+    conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50% / calc(var(--tooth) * 2) 100%;
 }
-.robot small {
-  grid-column: 2 / -1;
-  font-size: 13px;
-  color: var(--text-2);
+
+.stamp {
+  position: absolute;
+  top: 26px;
+  right: 22px;
+  padding: 4px 12px;
+  font-size: 14px;
+  font-weight: 800;
+  background: var(--tag);
+  transform: rotate(6deg);
 }
-.robot em {
-  font-style: normal;
+
+.paperHead {
+  text-align: center;
+  padding-bottom: 20px;
+  border-bottom: 1.5px dashed var(--asphalt-3);
+}
+.paperHead p:first-child {
   font-size: 12px;
-  color: var(--muted);
-  text-align: right;
+  font-weight: 800;
 }
+.paperHead h3 {
+  margin: 10px 0 2px;
+  font-size: 26px;
+  font-weight: 780;
+  letter-spacing: -0.03em;
+}
+.paperHead p:last-child {
+  font-size: 14px;
+  color: var(--asphalt-2);
+}
+
+.block {
+  padding: 20px 0;
+  border-bottom: 1.5px dashed var(--asphalt-3);
+}
+.block h4 {
+  margin: 0 0 10px;
+  font-size: 13px;
+  font-weight: 750;
+  color: var(--asphalt-2);
+}
+.row {
+  display: grid;
+  grid-template-columns: 6.5em 1fr;
+  gap: 12px;
+  padding: 3px 0;
+}
+.row dt {
+  font-weight: 650;
+}
+.row dd {
+  color: var(--asphalt-2);
+}
+
 .quote {
   width: 100%;
   border-collapse: collapse;
-  font-size: 14px;
+}
+.quote th {
+  text-align: left;
+  font-weight: 650;
+  padding: 5px 0;
+}
+.quote th span {
+  display: block;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--asphalt-3);
 }
 .quote td {
-  padding: 10px 0;
-  border-bottom: 1px dashed var(--line-2);
-  vertical-align: top;
-}
-.quote td:first-child {
-  color: var(--text);
-  width: 38%;
-}
-.quote td:nth-child(2) {
-  color: var(--muted);
-  font-size: 13px;
-  padding-right: 12px;
-}
-.quote td:last-child {
   text-align: right;
+  vertical-align: top;
+  padding: 5px 0;
   white-space: nowrap;
+  color: var(--asphalt-2);
 }
-.tbd {
-  font-size: 12px;
-  color: var(--muted);
-  padding: 3px 7px;
-  border: 1px dashed var(--line-3);
-}
-.total td {
-  border-bottom: 0;
+.quote tfoot th,
+.quote tfoot td {
   padding-top: 14px;
-  font-weight: 600;
+  font-size: 18px;
+  font-weight: 780;
+  color: var(--asphalt);
+  border-top: 1.5px solid var(--asphalt);
 }
-.total td:first-child {
-  color: var(--white);
+
+.paperFoot {
+  padding-top: 18px;
+  font-size: 13px;
+  text-align: center;
+  color: var(--asphalt-3);
 }
-.side {
-  display: grid;
-  gap: 28px;
-}
-.steps {
-  display: grid;
-  border-top: 1px solid var(--line);
-}
-.steps li {
-  display: grid;
-  grid-template-columns: 40px minmax(0, 1fr);
-  gap: 4px 12px;
-  padding: 18px 0;
-  border-bottom: 1px solid var(--line);
-}
-.steps span {
-  grid-row: span 2;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--cyan);
-  padding-top: 4px;
-}
-.steps h3 {
-  font-size: 17px;
-  font-weight: 600;
-  letter-spacing: -0.015em;
-  color: var(--white);
-}
-.steps p {
-  font-size: 14.5px;
-  color: var(--text-2);
-}
-.basis {
-  display: grid;
-  gap: 10px;
-  padding: 16px 18px;
-  border-left: 2px solid var(--amber);
-  background: rgba(231, 180, 92, 0.06);
-  font-size: 13.5px;
-  color: var(--text-2);
-}
-.basis strong {
-  color: var(--amber);
-}
-@media (max-width: 960px) {
+
+@media (max-width: 900px) {
   .grid {
     grid-template-columns: 1fr;
   }
+  .text {
+    position: static;
+  }
+  .paperWrap {
+    max-width: 30rem;
+  }
 }
-@media (max-width: 520px) {
-  .kv {
+
+@media (max-width: 420px) {
+  .paper {
+    padding: 28px 20px 40px;
+  }
+  .row {
     grid-template-columns: 1fr;
-    gap: 2px;
-  }
-  .kv dd {
-    margin-bottom: 8px;
-  }
-  .robot {
-    grid-template-columns: 22px minmax(0, 1fr);
-  }
-  .robot em {
-    grid-column: 2;
-    text-align: left;
-  }
-  .quote td:nth-child(2) {
-    display: none;
+    gap: 0;
+    padding: 5px 0;
   }
 }

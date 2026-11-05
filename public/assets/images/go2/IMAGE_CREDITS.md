@@ -11,11 +11,11 @@ Unitree 공식 사이트의 제품 이미지는 "All Rights Reserved"로 표시�
 
 | 사용 파일 | 원본 페이지 | 원본 이미지 | 저작자 | 라이선스 | 수정 | 사이트 내 사용 위치 |
 |---|---|---|---|---|---|---|
-| `go2-hero.webp`, `go2-hero-900.webp` | [Robotic dog stands on a red carpet](https://commons.wikimedia.org/wiki/File:Robotic_dog_stands_on_a_red_carpet.jpg) | [jpg](https://upload.wikimedia.org/wikipedia/commons/4/40/Robotic_dog_stands_on_a_red_carpet.jpg) | Nenad Stojković (Commons 업로더: Shixart1985) | [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/) | 크롭(가로 15–85%, 세로 6–100%), 크기 조정, WebP. 사이트에서는 CSS 흑백 필터로 표시 | HERO |
-| `go2-sensor.webp`, `go2-sensor-700.webp` | 위와 같음 | 위와 같음 | 위와 같음 | CC BY 2.0 | 머리 부분 크롭(가로 38–70%, 세로 28–70%), 크기 조정, WebP | SOLUTION · Go2 Store Scanner |
-| `go2-front.webp`, `go2-front-700.webp` | [Vancouver Auto Show 2025 - 54403754651](https://commons.wikimedia.org/wiki/File:Vancouver_Auto_Show_2025_-_54403754651.jpg) (Flickr 원본: [GoToVan](https://www.flickr.com/photos/47022937@N03/54403754651/)) | [jpg](https://upload.wikimedia.org/wikipedia/commons/4/44/Vancouver_Auto_Show_2025_-_54403754651.jpg) | GoToVan | [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/) | 크롭(관람객 얼굴 제외), 크기 조정, WebP | WORKFLOW · Unitree Go2 EDU 단계 |
-| `go2-side.webp`, `go2-side-700.webp` | [Vancouver Auto Show 2025 - 54403927214](https://commons.wikimedia.org/wiki/File:Vancouver_Auto_Show_2025_-_54403927214.jpg) (Flickr 원본: [GoToVan](https://www.flickr.com/photos/47022937@N03/54403927214/)) | [jpg](https://upload.wikimedia.org/wikipedia/commons/8/89/Vancouver_Auto_Show_2025_-_54403927214.jpg) | GoToVan | [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/) | 크롭(배경 인물 얼굴 제외), 크기 조정, WebP | SOLUTION · Go2 Store Scanner, DIGITAL TWIN · Real robot |
-| `go2-operation.webp`, `go2-operation-700.webp` | [World Dog Surfing Championship 2026 01](https://commons.wikimedia.org/wiki/File:World_Dog_Surfing_Championship_2026_01.jpg) | [jpg](https://upload.wikimedia.org/wikipedia/commons/e/e4/World_Dog_Surfing_Championship_2026_01.jpg) | Jesse Kornblum | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | 크롭, 크기 조정, WebP. **수정본도 CC BY-SA 4.0으로 배포합니다.** | WORKFLOW · Spatial Data Acquisition 단계 |
+| `go2-hero.webp`, `go2-hero-900.webp` | [Robotic dog stands on a red carpet](https://commons.wikimedia.org/wiki/File:Robotic_dog_stands_on_a_red_carpet.jpg) | [jpg](https://upload.wikimedia.org/wikipedia/commons/4/40/Robotic_dog_stands_on_a_red_carpet.jpg) | Nenad Stojković (Commons 업로더: Shixart1985) | [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/) | 크롭(가로 15–85%, 세로 6–100%), 크기 조정, WebP | 현재 미사용 |
+| `go2-sensor.webp`, `go2-sensor-700.webp` | 위와 같음 | 위와 같음 | 위와 같음 | CC BY 2.0 | 머리 부분 크롭(가로 38–70%, 세로 28–70%), 크기 조정, WebP | 현재 미사용 |
+| `go2-front.webp`, `go2-front-700.webp` | [Vancouver Auto Show 2025 - 54403754651](https://commons.wikimedia.org/wiki/File:Vancouver_Auto_Show_2025_-_54403754651.jpg) (Flickr 원본: [GoToVan](https://www.flickr.com/photos/47022937@N03/54403754651/)) | [jpg](https://upload.wikimedia.org/wikipedia/commons/4/44/Vancouver_Auto_Show_2025_-_54403754651.jpg) | GoToVan | [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/) | 크롭(관람객 얼굴 제외), 크기 조정, WebP | 검증 섹션 · 실제 로봇 |
+| `go2-side.webp`, `go2-side-700.webp` | [Vancouver Auto Show 2025 - 54403927214](https://commons.wikimedia.org/wiki/File:Vancouver_Auto_Show_2025_-_54403927214.jpg) (Flickr 원본: [GoToVan](https://www.flickr.com/photos/47022937@N03/54403927214/)) | [jpg](https://upload.wikimedia.org/wikipedia/commons/8/89/Vancouver_Auto_Show_2025_-_54403927214.jpg) | GoToVan | [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/) | 크롭(배경 인물 얼굴 제외), 크기 조정, WebP | 현재 미사용 |
+| `go2-operation.webp`, `go2-operation-700.webp` | [World Dog Surfing Championship 2026 01](https://commons.wikimedia.org/wiki/File:World_Dog_Surfing_Championship_2026_01.jpg) | [jpg](https://upload.wikimedia.org/wikipedia/commons/e/e4/World_Dog_Surfing_Championship_2026_01.jpg) | Jesse Kornblum | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | 크롭, 크기 조정, WebP. **수정본도 CC BY-SA 4.0으로 배포합니다.** | 현재 미사용 |
 
 ## 검토했지만 쓰지 않은 사진
 
@@ -29,5 +29,6 @@ Unitree 공식 사이트의 제품 이미지는 "All Rights Reserved"로 표시�
 
 ## 사이트 표기
 
-각 사진 아래 캡션과 페이지 하단 "Image credits"에 저작자, 라이선스, 원본 링크를 표시합니다.
-사진 목록은 `src/data/media.ts`의 `CREDITS`와 같아야 합니다.
+사이트에 나오는 사진은 캡션과 페이지 하단 "이미지에 대해"에 저작자, 라이선스, 원본 링크를 표시합니다.
+사진 목록은 `src/data/media.ts`의 `CREDITS`와 같아야 하고, 하단 표기는 `src/components/Footer.tsx`의 `USED_PHOTOS`에 넣은 사진만 나옵니다.
+2026-11-05 사이트 개편 이후 첫 화면과 과정 섹션은 Isaac Sim 렌더로 바뀌었고, 실제 사진은 검증 섹션의 한 장만 씁니다.

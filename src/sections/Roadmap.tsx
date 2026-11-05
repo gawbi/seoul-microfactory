@@ -1,4 +1,5 @@
-import { Reveal, SectionHeader, StatusBadge } from '../components/ui'
+import { Check } from 'lucide-react'
+import { StatusText } from '../components/ui'
 import { ROADMAP, ROADMAP_UPDATED } from '../data/roadmap'
 import s from './Roadmap.module.css'
 
@@ -6,45 +7,38 @@ export function Roadmap() {
   return (
     <section id="roadmap" className="section" aria-labelledby="roadmap-title">
       <div className="container">
-        <SectionHeader
-          index="09"
-          label="Roadmap"
-          title={<span id="roadmap-title">다섯 단계로 나눠 하나씩 검증합니다.</span>}
-          lead="각 단계는 앞 단계의 결과물이 있어야 시작할 수 있습니다. 진행 상황은 실제로 끝낸 작업만 체크합니다."
-        />
-        <Reveal as="div">
-          <ol className={s.list}>
-            {ROADMAP.map((p) => (
-              <li className={s.phase} key={p.no} data-status={p.status}>
-                <div className={`mono ${s.rail}`}>
-                  <span className={s.dot} aria-hidden="true" />
-                  Phase {p.no}
-                </div>
-                <h3>
-                  <span>{p.title}</span>
-                  <span className="mono">{p.titleEn}</span>
-                </h3>
+        <div className={s.head}>
+          <h2 id="roadmap-title" className="h2">
+            지금은 세 번째 단계에 있습니다.
+          </h2>
+          <p className={s.updated}>{ROADMAP_UPDATED} 기준. 끝낸 일만 체크합니다.</p>
+        </div>
+        <ol className={s.track}>
+          {ROADMAP.map((p) => {
+            const done = p.tasks.filter((t) => t.done).length
+            return (
+              <li key={p.no} className={s.phase} data-status={p.status}>
+                <span className={`wide num ${s.no}`}>{Number(p.no)}</span>
+                <h3>{p.title}</h3>
                 <p className={s.goal}>{p.goal}</p>
-                <ul className={s.tasks}>
+                <ul className={s.tasks} aria-label={`세부 작업 ${p.tasks.length}개 중 ${done}개 완료`}>
                   {p.tasks.map((t) => (
-                    <li key={t.label}>
-                      <span className={s.check} data-done={t.done} aria-label={t.done ? '완료' : '미완료'} />
-                      {t.label}
+                    <li key={t.label} data-done={t.done}>
+                      <span className={s.box} aria-hidden="true">
+                        {t.done && <Check size={12} strokeWidth={3} />}
+                      </span>
+                      <span>
+                        {t.label}
+                        {t.done && <span className="sr-only"> (완료)</span>}
+                      </span>
                     </li>
                   ))}
                 </ul>
-                <div className={s.foot}>
-                  <p className={s.deliverable}>
-                    <b>Deliverable</b>
-                    {p.deliverable}
-                  </p>
-                  <StatusBadge status={p.status} />
-                </div>
+                <StatusText status={p.status} note={`결과물: ${p.deliverable}`} />
               </li>
-            ))}
-          </ol>
-          <p className={`mono ${s.updated}`}>Last updated · {ROADMAP_UPDATED}</p>
-        </Reveal>
+            )
+          })}
+        </ol>
       </div>
     </section>
   )

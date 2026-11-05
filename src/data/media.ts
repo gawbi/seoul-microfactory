@@ -2,7 +2,7 @@ import type { MediaKind } from './types'
 
 /*
  * 사이트에 쓰는 모든 이미지·영상의 목록.
- * src가 null이면 화면에는 컨셉 시각화나 "준비 중" 자리표시가 나온다.
+ * src가 null이면 화면에는 "준비 중" 자리표시가 나온다.
  * 실제 파일을 public/assets/ 아래에 넣고 src만 채우면 교체된다.
  */
 
@@ -31,6 +31,16 @@ const go2 = (name: string, w: number, h: number, small: number) => ({
   ],
   width: w,
   height: h,
+})
+
+const cine = (name: string, w = 2560) => ({
+  src: `assets/cinematic/${name}.webp`,
+  srcSet: [
+    { src: `assets/cinematic/${name}-1280.webp`, width: 1280 },
+    { src: `assets/cinematic/${name}.webp`, width: w },
+  ],
+  width: w,
+  height: (w * 9) / 16,
 })
 
 export const MEDIA = {
@@ -80,7 +90,81 @@ export const MEDIA = {
     creditId: 'go2-surfing',
   },
 
-  /* 아래는 아직 파일이 없는 슬롯. Isaac Sim 작업이 끝나면 채운다. */
+  /* Isaac Sim 6.2 시네마틱 렌더 (sim/phase10_cinematic.py). 모두 가상 매장 시뮬레이션이다. */
+  cineAisle: {
+    id: 'cineAisle',
+    kind: 'SIMULATION',
+    type: 'image',
+    ...cine('aisle_walk', 1920),
+    alt: '밤 매장 통로를 걷는 Go2. 지나온 선반에는 LiDAR로 모은 점이 남아 있다.',
+    caption: '통로를 걷는 Go2. 지나온 자리에 시뮬레이션 LiDAR 점이 남습니다.',
+  },
+  cineGimbal: {
+    id: 'cineGimbal',
+    kind: 'SIMULATION',
+    type: 'image',
+    ...cine('aisle_gimbal', 1920),
+    alt: '짐벌 카메라를 얹은 Go2가 선반 옆을 걸어가는 모습. 선반에는 LiDAR로 모은 점이 남아 있다.',
+    caption: '짐벌 카메라를 얹은 Go2 (짐벌은 단순화 모델)',
+  },
+  cineSide: {
+    id: 'cineSide',
+    kind: 'SIMULATION',
+    type: 'image',
+    ...cine('aisle_close', 1920),
+    alt: '낮은 카메라 앞으로 다가오는 Go2와 뒤편 선반',
+    caption: '통로 끝으로 다가오는 Go2',
+  },
+  cineDoor: {
+    id: 'cineDoor',
+    kind: 'SIMULATION',
+    type: 'image',
+    ...cine('door_night'),
+    alt: '밤거리에서 불 켜진 매장 입구 쪽으로 걸어가는 Go2',
+    caption: '문 닫은 매장으로 들어서는 Go2',
+  },
+  cineArm: {
+    id: 'cineArm',
+    kind: 'SIMULATION',
+    type: 'image',
+    ...cine('arm_macro'),
+    alt: '작업대 위 SO-101 로봇 팔이 주황색 상자를 집으려고 내려오는 모습',
+    caption: '작업대 위 SO-101',
+  },
+  cineArmWide: {
+    id: 'cineArmWide',
+    kind: 'SIMULATION',
+    type: 'image',
+    ...cine('arm_wide'),
+    alt: '작업등 아래 작업대와 SO-101 로봇 팔',
+    caption: '작업대와 SO-101',
+  },
+  cineCloud: {
+    id: 'cineCloud',
+    kind: 'SIMULATION',
+    type: 'image',
+    ...cine('cloud_wide'),
+    alt: '점으로만 드러난 매장 전체. 선반, 냉장 쇼케이스, 계산대 윤곽이 보인다.',
+    caption: '시뮬레이션 LiDAR로 모은 매장 전체 (196,503점)',
+  },
+  cineCloudAisle: {
+    id: 'cineCloudAisle',
+    kind: 'SIMULATION',
+    type: 'image',
+    ...cine('cloud_aisle'),
+    alt: '통로 높이에서 본 포인트 클라우드. 양쪽 선반이 점으로 드러난다.',
+    caption: '통로 높이에서 본 포인트 클라우드',
+  },
+  heroFilm: {
+    id: 'heroFilm',
+    kind: 'SIMULATION',
+    type: 'video',
+    src: 'assets/cinematic/hero.mp4',
+    poster: 'assets/cinematic/hero-poster.webp',
+    alt: '밤 매장 통로를 걸어오는 Go2. Isaac Sim 6.2 패스 트레이싱 렌더.',
+    caption: '',
+  },
+
   simDemo: {
     id: 'simDemo',
     kind: 'SIMULATION',
@@ -88,7 +172,7 @@ export const MEDIA = {
     src: 'assets/simulation/seoul_microfactory_demo.mp4',
     poster: 'assets/simulation/demo_poster.webp',
     alt: 'NVIDIA Isaac Sim 6.2로 만든 SEOUL MICROFACTORY 시뮬레이션 데모. Go2가 가상 매장을 스캔하고, 포인트 클라우드와 디지털 트윈을 거쳐 SO-101이 상자를 옮긴다.',
-    caption: 'Isaac Sim 6.2 시뮬레이션 데모 (약 1분)',
+    caption: 'Isaac Sim 6.2 시뮬레이션 데모, 53초',
   },
   simStore: {
     id: 'simStore',
@@ -170,7 +254,7 @@ export const CREDITS: Credit[] = [
     pageUrl: 'https://commons.wikimedia.org/wiki/File:Robotic_dog_stands_on_a_red_carpet.jpg',
     license: 'CC BY 2.0',
     licenseUrl: 'https://creativecommons.org/licenses/by/2.0/',
-    modified: '크롭, 크기 조정, WebP 변환. 사이트에서 흑백 필터로 표시',
+    modified: '크롭, 크기 조정, WebP 변환',
   },
   {
     id: 'go2-vancouver-front',

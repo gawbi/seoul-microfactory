@@ -1,0 +1,123 @@
+.section {
+  background: var(--receipt);
+}
+
+.title {
+  margin-bottom: clamp(48px, 6vw, 88px);
+}
+
+.cols {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 64px clamp(40px, 6vw, 96px);
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: 24px;
+  border-top: 2px solid var(--asphalt);
+}
+.col h3 {
+  font-size: var(--t-h3);
+  font-weight: 740;
+  letter-spacing: -0.03em;
+}
+.colLead {
+  color: var(--asphalt-2);
+  max-width: 34rem;
+}
+
+.log {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+.log th {
+  text-align: left;
+  font-size: var(--t-small);
+  font-weight: 650;
+  color: var(--asphalt-3);
+  padding: 0 16px 10px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.log td {
+  padding: 14px 16px 14px 0;
+  vertical-align: top;
+  border-bottom: 1px solid var(--rule);
+  line-height: 1.6;
+}
+.log td:nth-child(1),
+.log td:nth-child(2) {
+  white-space: nowrap;
+}
+.log td:nth-child(2) {
+  font-weight: 700;
+}
+
+.small {
+  font-size: var(--t-small);
+  color: var(--asphalt-3);
+}
+
+.metrics {
+  border-top: 1px solid var(--rule);
+}
+.metrics li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 24px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.metrics strong {
+  display: block;
+  font-weight: 650;
+}
+.metrics span {
+  display: block;
+  font-size: 14px;
+  color: var(--asphalt-3);
+  line-height: 1.55;
+}
+.metrics em {
+  flex: none;
+  font-style: normal;
+  font-weight: 650;
+  color: var(--asphalt-3);
+}
+
+.photo {
+  margin-top: 16px;
+}
+.photo > div {
+  aspect-ratio: 16 / 10;
+}
+
+@media (max-width: 900px) {
+  .cols {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .log thead {
+    display: none;
+  }
+  .log tr {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 2px 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .log td {
+    padding: 0;
+    border: 0;
+  }
+  .log td:nth-child(3) {
+    grid-column: 1 / -1;
+  }
+}

@@ -1,34 +1,28 @@
 import { Footer } from './components/Footer'
 import { Navbar } from './components/Navbar'
-import { DigitalTwin } from './sections/DigitalTwin'
+import { Evidence } from './sections/Evidence'
+import { Film } from './sections/Film'
 import { Hero } from './sections/Hero'
-import { Problem } from './sections/Problem'
+import { Intro } from './sections/Intro'
+import { Process } from './sections/Process'
 import { Report } from './sections/Report'
-import { RobotValidation } from './sections/RobotValidation'
 import { Roadmap } from './sections/Roadmap'
-import { Solution } from './sections/Solution'
-import { TechStack } from './sections/TechStack'
-import { Vision } from './sections/Vision'
-import { Workflow } from './sections/Workflow'
 
 export default function App() {
   return (
     <>
-      <a className="skip-link" href="#problem">
+      <a className="skip-link" href="#intro">
         본문으로 건너뛰기
       </a>
       <Navbar />
+      <Hero />
       <main>
-        <Hero />
-        <Problem />
-        <Solution />
-        <Workflow />
-        <DigitalTwin />
+        <Intro />
+        <Process />
+        <Film />
         <Report />
-        <RobotValidation />
-        <TechStack />
+        <Evidence />
         <Roadmap />
-        <Vision />
       </main>
       <Footer />
     </>

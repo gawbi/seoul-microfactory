@@ -53,6 +53,7 @@ export const ROADMAP: Phase[] = [
     tasks: [
       { label: '가상 매장 USD 씬 구성 (실측 전 가정 배치)', done: true },
       { label: '충돌·물리 속성 설정', done: true },
+      { label: 'Go2 보행 정책 재학습 (서서 걷는 자세)', done: true },
       { label: 'Go2 보행·SO-101 Pick & Place 시뮬레이션', done: true },
       { label: '실측 매장 데이터로 씬 교체', done: false },
     ],

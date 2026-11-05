@@ -1,0 +1,116 @@
+.section {
+  overflow: hidden;
+}
+
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px 48px;
+  margin-bottom: clamp(32px, 4vw, 56px);
+}
+.meta {
+  font-size: var(--t-small);
+  color: var(--night-text-2);
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 32px clamp(20px, 3vw, 48px);
+  margin-top: clamp(32px, 4vw, 56px);
+}
+.facts > div {
+  padding-top: 16px;
+  border-top: 1px solid var(--night-rule);
+}
+.facts dt {
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.facts dd {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--night-text-2);
+}
+
+.stills {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: auto auto;
+  gap: clamp(16px, 2vw, 28px);
+  margin-top: clamp(72px, 9vw, 136px);
+}
+.stills > figure > div {
+  aspect-ratio: 16 / 9;
+}
+.big {
+  grid-row: span 2;
+}
+.stills > .big > div {
+  flex: 1 1 auto;
+  aspect-ratio: auto;
+  min-height: 0;
+}
+
+/* 밤 입구 장면 */
+.door {
+  position: relative;
+  min-height: min(92svh, 64vw);
+  display: flex;
+  align-items: flex-end;
+  isolation: isolate;
+}
+.door > .doorImg {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+}
+.doorImg > div {
+  height: 100%;
+}
+.door::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(to top, rgba(12, 14, 16, 0.85), rgba(12, 14, 16, 0) 55%);
+}
+.doorText {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-bottom: clamp(32px, 5vw, 72px);
+}
+.doorText > p {
+  max-width: 30rem;
+  color: var(--night-text-2);
+}
+.doorText .doorCredit {
+  font-size: var(--t-small);
+}
+
+@media (max-width: 900px) {
+  .facts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .stills {
+    grid-template-columns: 1fr;
+  }
+  .big {
+    grid-row: auto;
+  }
+  .stills > .big > div {
+    aspect-ratio: 16 / 9;
+  }
+  .door {
+    min-height: 88svh;
+  }
+}
+
+@media (max-width: 560px) {
+  .facts {
+    grid-template-columns: 1fr;
+  }
+}

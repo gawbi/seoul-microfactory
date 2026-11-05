@@ -26,6 +26,31 @@ def physics_material(stage, path, prim_paths, friction=1.0):
             UsdShade.MaterialBindingAPI.Apply(prim).Bind(mat, UsdShade.Tokens.weakerThanDescendants, "physics")
 
 
+def flat_policy_artifact():
+    """Isaac Lab 공식 Go2 평지 체크포인트(export_flat_policy.py로 변환)를 번들 env/IO 설정과 묶는다.
+
+    관측 48·행동 12·DCMotor 액추에이터가 번들 정책과 같아서 모델 파일만 바꾼다.
+    (artifact, 이름)을 돌려준다. 파일이 없으면 (None, "bundled").
+    """
+    import os
+
+    from isaacsim.robot.policy.examples.spec import PolicyArtifact
+    from isaacsim.storage.native import get_assets_root_path
+
+    base = os.path.join(os.path.dirname(os.path.abspath(__file__)), "output", "policies")
+    # 자세 보상을 더해 다시 학습한 정책(train_go2_upright.py)이 있으면 그것을 우선 쓴다
+    for name in ("go2_upright", "go2_flat_isaaclab"):
+        d = os.path.join(base, name)
+        model, sha = os.path.join(d, "policy.pt"), os.path.join(d, "policy.sha256")
+        if os.path.exists(model) and os.path.exists(sha):
+            break
+    else:
+        return None, "bundled"
+    pdir = f"{get_assets_root_path()}/Isaac/Samples/Policies/go2"
+    art = PolicyArtifact.from_files(model, f"{pdir}/physx_env.yaml", f"{pdir}/go2_physx_IO_descriptors.yaml", model_sha256=open(sha).read().strip())
+    return art, name
+
+
 class Go2Walker:
     """번들 Go2 flat-terrain 정책을 [vx, vy, yaw_rate] 명령으로 구동한다 (물리 기반 보행)."""
 
@@ -33,7 +58,10 @@ class Go2Walker:
         from isaacsim.robot.policy.examples import RobotPolicyRunner, get_go2_spec
 
         half = yaw / 2
-        spec = get_go2_spec(default_spawn_orientation=(float(np.cos(half)), 0.0, 0.0, float(np.sin(half))))
+        orient = (float(np.cos(half)), 0.0, 0.0, float(np.sin(half)))
+        flat, self.policy_name = flat_policy_artifact()
+        # 평지 정책이 준비돼 있으면 그것을 쓴다 (번들 정책은 거친 지형용이라 몸을 낮추고 다리를 벌린 채 걷는다)
+        spec = get_go2_spec(engines={"physx": flat}, default_spawn_orientation=orient) if flat else get_go2_spec(default_spawn_orientation=orient)
         self.runner = RobotPolicyRunner(spec, prim_path=prim_path, position=list(position))
         self.command = [0.0, 0.0, 0.0]
         self.ready = False
