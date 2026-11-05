@@ -1,0 +1,38 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:P;src:url(file:///home/ga/seoul/node_modules/pretendard/dist/web/variable/woff2/PretendardVariable.woff2)}
+@font-face{font-family:M;src:url(file:///home/ga/seoul/node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-500-normal.woff2)}
+*{margin:0;box-sizing:border-box}
+html,body{width:1600px;height:900px;background:#070b12;overflow:hidden;font-family:P;color:#e8eef5}
+.g{position:absolute;inset:0;background-image:linear-gradient(rgba(150,180,215,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(150,180,215,.07) 1px,transparent 1px);background-size:64px 64px;-webkit-mask-image:radial-gradient(ellipse 75% 70% at 50% 50%,#000,transparent 80%)}
+.arch,.title{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.k{font:500 14px M;letter-spacing:.18em;color:#5fd4f0;margin-bottom:34px}
+.lanes{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;width:1360px}
+.lane{border:1px solid rgba(150,180,215,.25);background:rgba(13,21,32,.85);padding:22px 22px 24px}
+.lane h3{font:500 13px M;letter-spacing:.16em;color:#aab8c8;margin-bottom:16px}
+.node{display:flex;justify-content:space-between;align-items:center;padding:13px 14px;border:1px solid rgba(150,180,215,.2);margin-top:9px;font-size:18px;font-weight:600;color:#f5f9fc}
+.node span{font:500 11px M;color:#708399;letter-spacing:.08em}
+.node.on{border-color:#5fd4f0;background:rgba(95,212,240,.08)}
+.flow{margin-top:26px;font:500 13px M;letter-spacing:.12em;color:#708399}
+.flow b{color:#5fd4f0;font-weight:500}
+.title h1{font-size:96px;letter-spacing:-.045em;font-weight:600;line-height:1;color:#fff;text-align:center}
+.title h1 em{font-style:normal;color:#9fe6f7}
+.title p{margin-top:26px;font-size:26px;color:#dfe7f0;font-weight:500}
+.title .s{margin-top:40px;font:500 13px M;letter-spacing:.14em;color:#708399;text-align:center;line-height:1.9}
+</style></head><body><div class="g"></div>
+<div class="arch" id="A">
+ <div class="k">SYSTEM ARCHITECTURE</div>
+ <div class="lanes">
+  <div class="lane"><h3>REAL WORLD</h3><div class="node">Store <span>01</span></div><div class="node on">Unitree Go2 Ent-MTPTZ <span>02</span></div><div class="node">Spatial data <span>03</span></div></div>
+  <div class="lane"><h3>DIGITAL</h3><div class="node">3D reconstruction <span>04</span></div><div class="node on">Digital twin · Isaac Sim <span>05</span></div><div class="node">Automation analysis <span>06</span></div><div class="node">Deployment &amp; quote <span>07</span></div></div>
+  <div class="lane"><h3>PHYSICAL</h3><div class="node on">SO-ARM101 <span>08</span></div><div class="node">Validation &amp; feedback <span>09</span></div></div>
+ </div>
+ <div class="flow">SCAN <b>→</b> RECONSTRUCT <b>→</b> SIMULATE <b>→</b> RECOMMEND <b>→</b> VALIDATE</div>
+</div>
+<div class="title" id="B" style="display:none">
+ <div class="k">SEOUL MICROFACTORY</div>
+ <h1>Making Every Store<br><em>Robot&#8209;Ready.</em></h1>
+ <p>소상공인 매장을 Physical AI가 이해하는 공간으로.</p>
+ <div class="s">ALL ROBOT FOOTAGE IN THIS VIDEO IS SIMULATED IN NVIDIA ISAAC SIM 6.2<br>VIRTUAL STORE · NOT A REAL-WORLD SCAN</div>
+</div>
+<script>if(location.hash==='#title'){A.style.display='none';B.style.display='flex'}</script>
+</body></html>

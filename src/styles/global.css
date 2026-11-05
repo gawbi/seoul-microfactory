@@ -1,0 +1,219 @@
+:root {
+  /* surface */
+  --bg: #070b12;
+  --bg-2: #0a1019;
+  --surface: #0d1520;
+  --surface-2: #121c29;
+  --line: rgba(150, 180, 215, 0.11);
+  --line-2: rgba(150, 180, 215, 0.22);
+  --line-3: rgba(150, 180, 215, 0.36);
+
+  /* text */
+  --text: #e8eef5;
+  --text-2: #aab8c8;
+  --muted: #708399;
+
+  /* accent */
+  --cyan: #5fd4f0;
+  --cyan-2: #9fe6f7;
+  --cyan-a: rgba(95, 212, 240, 0.12);
+  --blue: #8fb4ff;
+  --white: #f5f9fc;
+  --amber: #e7b45c;
+  --green: #62dfa9;
+
+  --font-sans: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo',
+    'Noto Sans KR', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  --maxw: 1240px;
+  --gutter: clamp(16px, 4vw, 40px);
+  --section-y: clamp(96px, 12vw, 168px);
+  --nav-h: 64px;
+  --radius: 3px;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--nav-h);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.65;
+  letter-spacing: -0.005em;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+img,
+svg,
+video,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 0;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+::selection {
+  background: rgba(95, 212, 240, 0.28);
+  color: var(--white);
+}
+
+:focus-visible {
+  outline: 1.5px solid var(--cyan);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.container {
+  width: 100%;
+  max-width: calc(var(--maxw) + var(--gutter) * 2);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.section {
+  position: relative;
+  padding: var(--section-y) 0;
+  border-top: 1px solid var(--line);
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  z-index: 100;
+  padding: 8px 14px;
+  background: var(--cyan);
+  color: var(--bg);
+  font-weight: 600;
+  transform: translateY(-160%);
+  transition: transform 0.2s var(--ease-out);
+}
+.skip-link:focus {
+  transform: none;
+}
+
+/* scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.8s var(--ease-out),
+    transform 0.8s var(--ease-out);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* 누름 피드백: 누를 수 있는 요소는 살짝 눌려야 반응이 느껴진다 */
+.pressable {
+  transition: transform 160ms var(--ease-out);
+}
+.pressable:active {
+  transform: scale(0.97);
+}
+
+/* 동작 줄이기: 움직임은 없애고 짧은 opacity 전환만 남긴다 */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    transform: none;
+    transition: opacity 0.2s ease;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+  }
+  .pressable:active {
+    transform: none;
+  }
+}
+
+/* SVG plan view text (PlanView.tsx) */
+.plan-label {
+  font: 500 11px var(--font-mono);
+  letter-spacing: 0.1em;
+  fill: var(--muted);
+}
+.plan-dim line {
+  stroke: var(--line-3);
+}
+.plan-dim text {
+  font: 500 11px var(--font-mono);
+  letter-spacing: 0.08em;
+  fill: var(--text-2);
+}
