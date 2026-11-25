@@ -58,12 +58,43 @@
   #film .frame > video.frame__img { object-fit: contain; }
   #steps .panel { --p-h: 300px; }
   #cases .panel { --p-h: 0px; flex: 0 0 auto; aspect-ratio: 16 / 9; background: #15191d; }
-  #robots .panel { --p-h: 300px; background: #15191d; display: grid; place-items: center; }
-  #robots .panel > img { width: auto; height: auto; max-width: min(190px, 70%); max-height: 44px; }
+  #robots .panel { --p-h: 112px; height: var(--p-h); min-height: 0; aspect-ratio: auto; background: #15191d; display: grid; place-items: center; }
+  #robots .panel--light { background: #fff; }
+  #robots .panel.panel--light > span { color: #1d2125; }
+  #robots .card h3 { font-size: var(--t-body); }
+  #robots .panel > img { position: absolute; inset: 0; width: 100%; height: 100%; box-sizing: border-box; padding: calc((var(--p-h) - 40px) / 2) 16%; object-fit: contain; }
+  video.frame__img:focus-visible { outline: 3px solid var(--p-accent); outline-offset: -3px; }
+  #cases article { scroll-margin-top: calc(var(--nav) + 24px); }
   #robots .panel > span { color: #e9ebe6; font: 500 var(--t-card)/1.2 var(--font-display); }
   .cmp > .grid { padding-block: var(--s-4); border-bottom: 1px solid var(--line); }
   .cmp > .grid:first-child { padding-top: 0; }
-  @media (max-width: 639px) { #steps .panel, #robots .panel { --p-h: 180px; } }
+  @media (max-width: 639px) { #steps .panel { --p-h: 180px; } #robots .panel { --p-h: 88px; }
+    #robots .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } #robots .grid > .card { grid-column: auto; } }
+  /* 넓히기 그림: 원을 옮기고 키우는 것만 움직인다 (transform, opacity) */
+  .spread { margin: 0; background: var(--p-surface); border-radius: var(--r-lg); padding: var(--s-4); }
+  .spread svg { display: block; width: 100%; height: auto; max-height: 72svh; }
+  .spread .b { transform: translate(var(--x), var(--y)); transition: transform .9s cubic-bezier(.77, 0, .175, 1) var(--d), opacity .5s ease var(--d); }
+  .spread .b > circle { fill: var(--p-bg); stroke: var(--p-ink); stroke-width: 1; vector-effect: non-scaling-stroke; }
+  .spread .b.home > circle { fill: var(--p-ink); }
+  .spread .b.home > circle.dot { fill: var(--p-accent); stroke: none; }
+  .spread text { font: 500 13px/1 var(--font-text); fill: var(--p-ink); transition: opacity .4s ease .5s; }
+  .spread text tspan { fill: var(--p-muted); }
+  .spread .la { font-size: 17px; }
+  .spread .lb { fill: var(--p-muted); }
+  .spread[data-state="a"] .b { transform: translate(var(--cx), var(--cy)) scale(0); opacity: 0; transition-delay: 0s; }
+  .spread[data-state="a"] .b.home { transform: translate(var(--cx), var(--cy)) scale(var(--hs)); opacity: 1; }
+  .spread[data-state="a"] .b text, .spread[data-state="a"] .lb, .spread[data-state="b"] .la { opacity: 0; transition-delay: 0s; }
+  .spread-toggle { display: flex; flex-wrap: wrap; gap: var(--s-2); }
+  .spread-toggle button { font: 500 var(--t-body)/1 var(--font-text); min-height: 44px; padding: 0 var(--s-4); border: 1px solid var(--p-ink); border-radius: var(--r-btn); background: none; color: var(--p-ink); cursor: pointer; transition: transform .16s ease-out; }
+  .spread-toggle button[aria-pressed="true"] { background: var(--p-ink); color: var(--p-bg); }
+  .spread-toggle button:active { transform: scale(.97); }
+  .spread-toggle button:focus-visible { outline: 3px solid var(--p-accent); outline-offset: 2px; }
+  .spread-num { font: var(--display-weight) 20px/1.3 var(--font-display); }
+  .spread-num b { font-size: clamp(44px, 6vw, 72px); font-weight: var(--display-weight); letter-spacing: var(--display-tracking); font-variant-numeric: tabular-nums; margin-right: 2px; }
+  .spread-num span { display: block; font: 400 var(--t-body)/1.5 var(--font-text); color: var(--p-muted); }
+  .spread-note { font-size: 14px; line-height: 1.6; }
+  @media (prefers-reduced-motion: reduce) { .spread .b, .spread text { transition: none; } }
+  @media (max-width: 639px) { .spread text { font-size: 17px; } .spread .la { font-size: 24px; } }
 </style>
 </head>
 <body>
@@ -82,17 +113,17 @@
         <a class="nav__link" href="#cases">공장 <svg class="chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         <div class="nav__menu">
           <div class="wrap grid">
-            <a class="menu-card span-4" href="#cases">
+            <a class="menu-card span-4" href="#case-1">
               <div class="panel"><img class="frame__img" src="media/case1.jpg" alt="가공기 안으로 팔을 넣는 협동로봇" width="640" height="360" loading="lazy"></div>
               <span class="t-card">가공기에 소재 넣기</span>
               <span class="t-small muted">팔은 닿았지만 여유가 좁아 현장에서 다시 잽니다</span>
             </a>
-            <a class="menu-card span-4" href="#cases">
+            <a class="menu-card span-4" href="#case-2">
               <div class="panel"><img class="frame__img" src="media/case2.jpg" alt="검사대 옆에서 부품을 나눠 담는 로봇" width="640" height="360" loading="lazy"></div>
               <span class="t-card">다 깎은 부품 검사</span>
               <span class="t-small muted">사진 검사 AI를 8주 동안 현장에서 먼저 써 봅니다</span>
             </a>
-            <a class="menu-card span-4" href="#cases">
+            <a class="menu-card span-4" href="#case-3">
               <div class="panel"><img class="frame__img" src="media/case3.jpg" alt="용접 토치를 든 로봇 팔" width="640" height="360" loading="lazy"></div>
               <span class="t-card">제관과 용접</span>
               <span class="t-small muted">용접 품질은 실물 시험을 조건으로 검토합니다</span>
@@ -100,6 +131,7 @@
           </div>
         </div>
       </div>
+      <div class="nav__item"><a class="nav__link" href="#robots">로봇</a></div>
       <div class="nav__item"><a class="nav__link" href="#field">검사</a></div>
       <div class="nav__item"><a class="nav__link" href="#report">진단서</a></div>
       <div class="nav__item"><a class="nav__link" href="#diff">차이</a></div>
@@ -119,7 +151,7 @@
     <div class="wrap"><div class="hero-text">
       <div class="hero__text">
         <h1 id="hero-h">작은 공장을 위한 8주 AI 현장 트랙</h1>
-        <p class="hero__lead">대학생 두 명이 8주 동안 공장의 문제 하나를 가상과 현장에서 재 보고, 값을 하면 정부 지원사업으로 잇습니다. 화면은 모두 Isaac Sim으로 만든 가상 공장입니다.</p>
+        <p class="hero__lead">책임 엔지니어가 고른 문제 하나를 대학생 두 명이 8주 동안 가상과 현장에서 재 보고, 값을 하면 정부 지원사업으로 잇습니다. 화면은 모두 Isaac Sim으로 만든 가상 공장입니다.</p>
         <div class="btn-row"><a class="btn btn--primary" href="#film">전체 영상 보기<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a><a class="btn btn--secondary" href="#cases">여섯 공장 보기</a></div>
       </div>
     </div></div>
@@ -132,7 +164,7 @@
         <h2 id="film-h">2분 9초 전체 영상</h2>
         <p>대구 제3산업단지의 제조업체는 한 곳에 평균 4.3명이 일합니다. AI를 쓰지 않는 중소기업의 80.7%는 필요 없다고 답했고, 청년 일경험 사업은 원칙적으로 10인 이상 기업이 대상입니다.</p>
       </div>
-      <figure class="frame frame--photo fit-screen">
+      <figure class="frame frame--photo fit-screen fill">
         <video class="frame__img" controls playsinline preload="metadata" poster="media/poster.jpg" aria-label="가상 공장 여섯 곳을 따져 본 전체 영상"><source src="media/full.mp4" type="video/mp4"></video>
       </figure>
     </div>
@@ -145,25 +177,25 @@
         <p>로봇은 사 주지 않습니다. 맞는지 가려 줍니다. 새 사업이 아니라 이미 있는 사업을 작은 공장까지 잇는 과정입니다.</p>
       </div>
       <div class="grid">
-        <article class="card card--row card--open span-3">
+        <article class="card card--row span-3">
           <span class="step-num">1</span>
           <h3>공장을 가상으로 옮기기</h3>
-          <p>책임 엔지니어와 학생 두 명이 설비 자리를 재서 가상 공장을 만듭니다.</p>
+          <p>책임 엔지니어가 사장님과 문제 하나를 고르고, 학생 두 명이 설비 자리를 재서 가상 공장을 만듭니다.</p>
           <div class="panel"><img class="frame__img" src="media/step1.jpg" alt="점 20만 개로 되살린 가상 공장의 모습" width="960" height="540" loading="lazy"></div>
         </article>
-        <article class="card card--row card--open span-3">
+        <article class="card card--row span-3">
           <span class="step-num">2</span>
           <h3>가상으로 먼저 따지기</h3>
-          <p>학생이 로봇을 세워 보고, 생성형 AI가 진단 초안을 쓰고, 엔지니어가 검수합니다.</p>
+          <p>책임 엔지니어가 고른 로봇을 학생이 가상 공장에 세워 보고, 생성형 AI가 진단 초안을 쓰고, 엔지니어가 검수합니다.</p>
           <div class="panel"><img class="frame__img" src="media/step2.jpg" alt="컨베이어 끝에서 상자를 팔레트에 쌓는 로봇" width="960" height="540" loading="lazy"></div>
         </article>
-        <article class="card card--row card--open span-3">
+        <article class="card card--row span-3">
           <span class="step-num">3</span>
           <h3>현장에서 다시 재기</h3>
-          <p>학생이 주 2회 공장을 오가며 그 공장의 부품 사진으로 검사 AI를 맞춥니다.</p>
+          <p>학생이 주 2회 공장을 오가며 엔지니어의 과제와 피드백을 받아, 그 공장의 부품 사진으로 검사 AI를 맞춥니다.</p>
           <div class="panel"><img class="frame__img" src="media/heat_before.png" alt="긁힌 자리가 붉게 표시된 가공 부품 사진" width="384" height="384" loading="lazy"></div>
         </article>
-        <article class="card card--row card--open span-3">
+        <article class="card card--row span-3">
           <span class="step-num">4</span>
           <h3>근거를 갖고 정하기</h3>
           <p>제조 DX 전문가가 결과를 심사하고, 사장님이 계속 쓰기, 정식 도입, 접기 가운데 하나를 정합니다.</p>
@@ -181,48 +213,54 @@
           <p>바로 로봇을 사라고 할 곳은 한 곳도 없었습니다. 판정과 이유는 생성형 AI가 쓴 진단 초안을 그대로 옮겼고, 책임 엔지니어의 검수는 아직 받지 못했습니다.</p>
         </div>
         <div class="grid">
-          <article class="card card--row card--open span-4">
-            <h3>소재 넣기 <span class="badge">현장 실측 먼저</span></h3>
+          <article class="card card--row card--open span-4" id="case-1">
+            <p><span class="badge">현장 실측 먼저</span></p>
+            <h3>소재 넣기</h3>
             <p>직원 네 명. 소재를 넣고 빼는 일을 사장님이 직접 해서 가공기 앞을 떠나지 못합니다.</p>
             <p>위에서 넣는 경로가 문틀과 주축에 겹치고 간격은 5~7 cm입니다. 현장에서 다시 재야 합니다.</p>
             <div class="panel"><video class="frame__img" controls playsinline preload="none" poster="media/case1.jpg" aria-label="절삭가공 공장, 가공기에 소재 넣기 영상"><source src="media/case1.mp4" type="video/mp4"></video></div>
           </article>
-          <article class="card card--row card--open span-4">
-            <h3>외관 검사 <span class="badge">사진 AI부터</span></h3>
+          <article class="card card--row card--open span-4" id="case-2">
+            <p><span class="badge">사진 AI부터</span></p>
+            <h3>외관 검사</h3>
             <p>긁힘과 찍힘을 사람 눈으로 고릅니다. 바쁜 날에는 놓치기 쉽고 보는 사람마다 기준이 다릅니다.</p>
             <p>가상 사진에서 불량 13장 중 11장을 찾았고 오탐은 없었습니다. 현장 시범으로 먼저 확인합니다.</p>
             <div class="panel"><video class="frame__img" controls playsinline preload="none" poster="media/case2.jpg" aria-label="절삭가공 공장, 다 깎은 부품 검사 영상"><source src="media/case2.mp4" type="video/mp4"></video></div>
           </article>
-          <article class="card card--row card--open span-4">
-            <h3>용접 <span class="badge">조건부 검토</span></h3>
+          <article class="card card--row card--open span-4" id="case-3">
+            <p><span class="badge">조건부 검토</span></p>
+            <h3>용접</h3>
             <p>용접할 줄 아는 사람이 사장님과 한 명뿐입니다. 같은 모양 주문이 몰리면 납기를 맞추기 어렵습니다.</p>
             <p>팔은 닿았지만 용접 품질은 시뮬레이션이 보지 못합니다. 실물 시험을 조건으로 검토합니다.</p>
             <div class="panel"><video class="frame__img" controls playsinline preload="none" poster="media/case3.jpg" aria-label="제관, 용접 공장 영상"><source src="media/case3.mp4" type="video/mp4"></video></div>
           </article>
         </div>
       </div>
-      <div class="group stack-6">
+      <div class="group stack-5">
         <div class="grid">
-          <article class="card card--row card--open span-4">
-            <h3>부품 꺼내기 <span class="badge">보류</span></h3>
+          <article class="card card--row card--open span-4" id="case-4">
+            <p><span class="badge">보류</span></p>
+            <h3>부품 꺼내기</h3>
             <p>부품이 통에 쌓여 나옵니다. 다음 공정에 올리는 일에 한 사람이 하루 종일 붙어 있습니다.</p>
             <p>팔은 닿았지만 섞인 부품을 찾는 3D 카메라가 더 필요합니다. 4명 공장에는 부담이 큽니다.</p>
             <div class="panel"><video class="frame__img" controls playsinline preload="none" poster="media/case4.jpg" aria-label="금속가공, 자동차부품 공장 영상"><source src="media/case4.mp4" type="video/mp4"></video></div>
           </article>
-          <article class="card card--row card--open span-4">
-            <h3>상자 쌓기 <span class="badge">물량부터 확인</span></h3>
+          <article class="card card--row card--open span-4" id="case-5">
+            <p><span class="badge">물량부터 확인</span></p>
+            <h3>상자 쌓기</h3>
             <p>포장한 상자를 팔레트에 쌓는 일을 사장님이 직접 합니다.</p>
             <p>출하가 하루 몇 상자 수준이라 쌓을 일이 적을 수 있습니다. 먼저 하루 상자 수를 셉니다.</p>
             <div class="panel"><video class="frame__img" controls playsinline preload="none" poster="media/case5.jpg" aria-label="출하장, 팔레트에 상자 쌓기 영상"><source src="media/case5.mp4" type="video/mp4"></video></div>
           </article>
-          <article class="card card--row card--open span-4">
-            <h3>금형 <span class="badge">아직 아님</span></h3>
+          <article class="card card--row card--open span-4" id="case-6">
+            <p><span class="badge">아직 아님</span></p>
+            <h3>금형</h3>
             <p>매번 다른 금형을 한 벌씩 만듭니다.</p>
             <p>면담만으로 내린 판단입니다. 반복이 없으면 로봇이 할 일이 적고 정상품 사진도 모이지 않습니다.</p>
             <div class="panel"><video class="frame__img" controls playsinline preload="none" poster="media/case6.jpg" aria-label="금형 공장 영상"><source src="media/case6.mp4" type="video/mp4"></video></div>
           </article>
         </div>
-        <h3>AI가 따르는 판정 규칙 다섯 가지</h3>
+        <p class="t-card">AI가 따르는 판정 규칙 다섯 가지</p>
         <div class="grid">
           <ul class="rows span-6">
             <li><span class="rows__name">현장 실측 먼저</span><p>닿았지만 설비와의 여유가 15 cm보다 작을 때</p></li>
@@ -242,7 +280,7 @@
     <div class="wrap">
       <div class="grid">
         <div class="span-5 stack-4">
-          <h2 id="field-h">조건이 바뀌면 흠을 더 놓치는 검사 AI</h2>
+          <h2 id="field-h">조건이 바뀌면 흠 1장을 더 놓친 검사 AI</h2>
           <p class="t-lead">가상 검사 사진 13장으로 재 보니, 밝기와 놓는 자리를 조금 흔들자 놓친 흠이 2장에서 3장으로 늘었습니다. 그 조건의 사진으로 다시 학습하자 1장으로 줄었습니다. 기준을 현장에서 다시 잡는 일이 학생의 8주입니다.</p>
           <ul class="rows">
             <li><span class="rows__name">사람 검사와 나란히 놓고 잽니다</span></li>
@@ -263,8 +301,8 @@
     <div class="wrap">
       <div class="grid">
         <div class="span-5 stack-4">
-          <h2 id="report-h">AI가 쓰고 사람이 검수하는 진단서</h2>
-          <p class="t-lead">정할 수 있는 것은 규칙이 정하고, 생성형 AI는 초안을 쓰고, 책임 엔지니어가 서명해야 효력이 생깁니다. AI에게 기대하는 판정을 알려 주지 않았는데 다섯 작업 모두 규칙대로 나왔습니다.</p>
+          <h2 id="report-h">AI가 쓰고 사람이 검수하는 진단서 1장</h2>
+          <p class="t-lead">무엇을 볼지와 어떤 로봇으로 볼지는 책임 엔지니어가 정합니다. 생성형 AI는 초안을 쓰고, 엔지니어가 서명해야 효력이 생깁니다. AI에게 기대하는 판정을 알려 주지 않았는데 다섯 작업 모두 규칙대로 나왔습니다.</p>
           <ul class="rows">
             <li><span class="rows__name">입력을 모읍니다</span><span class="rows__value">코드</span></li>
             <li><span class="rows__name">작업마다 판정과 이유를 씁니다</span><span class="rows__value">생성형 AI</span></li>
@@ -276,7 +314,7 @@
           <p><a class="link" href="media/report.pdf">진단서 견본 PDF 보기</a></p>
         </div>
         <figure class="frame frame--photo frame--split span-6 start-7">
-          <img class="frame__img" src="media/report.png" alt="가상 공장으로 만든 AI와 로봇 도입 전 진단서 견본" width="1588" height="2246" loading="lazy" style="object-position: 50% 0">
+          <img class="frame__img" src="media/report.png" srcset="media/report_800.jpg 800w, media/report.png 1588w" sizes="(max-width: 639px) 342px, 628px" alt="가상 공장으로 만든 AI와 로봇 도입 전 진단서 견본" width="1588" height="2246" loading="lazy" style="object-position: 50% 0">
         </figure>
       </div>
     </div>
@@ -293,7 +331,28 @@
         <div class="grid" role="row"><span class="span-4" role="rowheader">누구에게</span><span class="span-4 start-5" role="cell">도입하기로 정하고 신청한 기업</span><span class="span-4 start-9" role="cell">아직 못 정한 10인 미만 공장을 찾아갑니다</span></div>
         <div class="grid" role="row"><span class="span-4" role="rowheader">어떻게</span><span class="span-4 start-5" role="cell">전문가 상담이나 구축비 일부 지원</span><span class="span-4 start-9" role="cell">8주 동안 그 공장 데이터로 실제로 재 봅니다</span></div>
         <div class="grid" role="row"><span class="span-4" role="rowheader">비용</span><span class="span-4 start-5" role="cell">기업이 일부 부담</span><span class="span-4 start-9" role="cell">공장 부담이 없습니다</span></div>
+        <div class="grid" role="row"><span class="span-4" role="rowheader">시작</span><span class="span-4 start-5" role="cell">기업이 공고를 보고 서류를 냅니다</span><span class="span-4 start-9" role="cell">미리 낼 서류 없이 전화 한 통으로 시작합니다</span></div>
+        <div class="grid" role="row"><span class="span-4" role="rowheader">순서</span><span class="span-4 start-5" role="cell">도입을 정한 뒤</span><span class="span-4 start-9" role="cell">도입을 정하기 전, 맞지 않으면 여기서 멈춥니다</span></div>
+        <div class="grid" role="row"><span class="span-4" role="rowheader">남는 것</span><span class="span-4 start-5" role="cell">구축 계획이나 설비</span><span class="span-4 start-9" role="cell">같은 기준으로 잰 숫자가 적힌 채점표 한 장</span></div>
         <div class="grid" role="row"><span class="span-4" role="rowheader">누가</span><span class="span-4 start-5" role="cell">전문가와 공급기업</span><span class="span-4 start-9" role="cell">지역 대학생이 하면서 현장 인재로 자랍니다</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="spread" aria-labelledby="spread-h">
+    <div class="wrap">
+      <div class="grid">
+        <div class="span-5 stack-4">
+          <h2 id="spread-h">3공단 20곳에서 대구 산업단지 23곳으로</h2>
+          <p class="t-lead">첫해는 제3산업단지의 공장 20곳입니다. 채점표가 쌓여 어떤 일에 통하는지 보이면 같은 틀을 다른 산업단지로 옮깁니다. 넓히는 순서와 시기는 정해진 계획이 아니라 구상입니다.</p>
+          <div class="spread-toggle" role="group" aria-label="보는 범위">
+            <button type="button" aria-pressed="true" data-state="a">첫해, 3공단</button>
+            <button type="button" aria-pressed="false" data-state="b">넓힐 때, 대구 전체</button>
+          </div>
+          <p class="spread-num"><b id="spread-n" data-v="20" data-a="20" data-b="9250">20</b>곳 <span id="spread-cap" data-a="제3산업단지의 첫해 시범 공장" data-b="대구 산업단지 23곳에 등록된 업체">제3산업단지의 첫해 시범 공장</span></p>
+          <p class="muted spread-note">원의 크기는 등록 업체 수이고 위치는 어림입니다. 대구시 공개 자료(2026년 8월 25일 기준)의 산업단지 등록 업체이며 제조업이 아닌 곳도 들어 있습니다. 그래서 관리공단 전수조사의 3공단 제조업체 2,024곳과 수가 다릅니다.</p>
+        </div>
+        <figure class="spread span-6 start-7" data-state="a"><svg viewBox="0 0 560 660" role="img" aria-label="제3산업단지에서 시작해 대구의 산업단지 23곳으로 넓히는 그림. 원의 크기는 등록 업체 수입니다." style="--hs:6.94;--cx:280.0px;--cy:300.0px"><g class="b" style="--x:160.3px;--y:471.4px;--d:560ms"><circle r="7.2"/><text x="15.2" y="4" text-anchor="start">테크노폴리스 <tspan>144</tspan></text></g><g class="b" style="--x:292.6px;--y:114.4px;--d:490ms"><circle r="7.6"/><text x="-15.6" y="-10" text-anchor="end">염색산업단지 <tspan>160</tspan></text></g><g class="b" style="--x:60.3px;--y:586.5px;--d:420ms"><circle r="10.7"/><text x="18.7" y="4" text-anchor="start">대구국가산업단지 <tspan>319</tspan></text></g><g class="b" style="--x:86.9px;--y:532.8px;--d:350ms"><circle r="10.7"/><text x="18.7" y="4" text-anchor="start">달성2차산업단지 <tspan>321</tspan></text></g><g class="b" style="--x:121.2px;--y:400.4px;--d:280ms"><circle r="11.1"/><text x="19.1" y="4" text-anchor="start">달성1차산업단지 <tspan>345</tspan></text></g><g class="b" style="--x:394.6px;--y:64.5px;--d:210ms"><circle r="14.8"/><text x="22.8" y="4" text-anchor="start">검단산업단지 <tspan>609</tspan></text></g><g class="b" style="--x:282.1px;--y:149.0px;--d:140ms"><circle r="24.5"/><text x="-32.5" y="4" text-anchor="end">서대구산업단지 <tspan>1,664</tspan></text></g><g class="b" style="--x:214.9px;--y:206.5px;--d:70ms"><circle r="36.1"/><text x="-44.1" y="4" text-anchor="end">성서산업단지 <tspan>3,616</tspan></text></g><g class="b home" style="--x:324.3px;--y:101.0px;--d:0ms"><circle r="21.6"/><circle class="dot" cx="2.53" cy="0.00" r="1.15"/><circle class="dot" cx="-3.23" cy="2.96" r="1.15"/><circle class="dot" cx="0.49" cy="-5.64" r="1.15"/><circle class="dot" cx="4.07" cy="5.31" r="1.15"/><circle class="dot" cx="-7.47" cy="-1.32" r="1.15"/><circle class="dot" cx="7.08" cy="-4.50" r="1.15"/><circle class="dot" cx="-2.37" cy="8.81" r="1.15"/><circle class="dot" cx="-4.52" cy="-8.70" r="1.15"/><circle class="dot" cx="9.80" cy="3.58" r="1.15"/><circle class="dot" cx="-10.19" cy="4.21" r="1.15"/><circle class="dot" cx="4.91" cy="-10.50" r="1.15"/><circle class="dot" cx="3.63" cy="11.58" r="1.15"/><circle class="dot" cx="-10.94" cy="-6.34" r="1.15"/><circle class="dot" cx="12.84" cy="-2.82" r="1.15"/><circle class="dot" cx="-7.83" cy="11.15" r="1.15"/><circle class="dot" cx="-1.81" cy="-13.97" r="1.15"/><circle class="dot" cx="11.11" cy="9.36" r="1.15"/><circle class="dot" cx="-14.95" cy="0.62" r="1.15"/><circle class="dot" cx="10.91" cy="-10.86" r="1.15"/><circle class="dot" cx="-0.73" cy="15.78" r="1.15"/><text x="29.6" y="4" text-anchor="start">제3산업단지 <tspan>1,297</tspan></text></g><text class="la" x="280.0" y="488.0" text-anchor="middle">제3산업단지 1,297곳 가운데 20곳</text><text class="lb" x="544" y="642" text-anchor="end">그 밖 14곳 775곳</text></svg></figure>
       </div>
     </div>
   </section>
@@ -301,29 +360,61 @@
   <section class="section" id="robots" aria-labelledby="robots-h">
     <div class="wrap">
       <div class="section-head">
-        <h2 id="robots-h">가상 시험에 쓴 로봇과 국내 제조사</h2>
-        <p>가상 시험에는 Fanuc CRX-10iA/L, Neuromeka OPTi3, Universal Robots UR10, Yaskawa NEX20을 썼습니다. 아래 네 곳은 로봇 검토로 나온 공장이 살펴볼 수 있는 곳이며 제휴나 추천이 아닙니다. 상표는 각 회사의 것입니다.</p>
+        <h2 id="robots-h">가상 시험에 쓴 로봇과 로봇 제조사 12곳</h2>
+        <p>가상 시험에는 Fanuc CRX-10iA/L, Neuromeka OPTi3, Universal Robots UR10, Yaskawa NEX20을 썼습니다. 아래 12곳은 로봇 검토로 나온 공장이 살펴볼 수 있는 곳이며 제휴나 추천이 아닙니다. 가나다순이고 상표는 각 회사의 것입니다.</p>
       </div>
       <div class="grid">
-        <a class="card card--row card--open span-3" href="https://www.neuromeka.com/robot" target="_blank" rel="noopener">
+        <a class="card card--row card--open span-2" href="https://www.neuromeka.com/robot" target="_blank" rel="noopener">
+          <div class="panel panel--top"><img src="media/logos/neuromeka.png" alt="뉴로메카 로고" loading="lazy"></div>
           <h3>뉴로메카</h3>
-          <p>가상 시험에 쓴 기종은 OPTi3 (용접 장면)입니다.</p>
-          <div class="panel"><img src="media/logos/neuromeka.png" alt="뉴로메카 로고" loading="lazy"></div>
+          <p>가상 시험 기종: OPTi3 (용접)</p>
         </a>
-        <a class="card card--row card--open span-3" href="https://www.doosanrobotics.com/kr/product-solutions/heritage/cobot/" target="_blank" rel="noopener">
+        <a class="card card--row card--open span-2" href="https://www.doosanrobotics.com/kr/product-solutions/heritage/cobot/" target="_blank" rel="noopener">
+          <div class="panel panel--top panel--light"><img src="media/logos/doosan.svg" alt="두산로보틱스 로고" loading="lazy"></div>
           <h3>두산로보틱스</h3>
-          <p>가상 시험에는 쓰지 않았습니다.</p>
-          <div class="panel"><img src="media/logos/doosan.svg" alt="두산로보틱스 로고" loading="lazy"></div>
         </a>
-        <a class="card card--row card--open span-3" href="https://www.fkc.co.kr/" target="_blank" rel="noopener">
+        <a class="card card--row card--open span-2" href="https://rainbow-robotics.com/%EC%A0%9C%ED%92%88%EC%86%94%EB%A3%A8%EC%85%98/%ED%98%91%EB%8F%99%EB%A1%9C%EB%B4%87/rb-series/" target="_blank" rel="noopener">
+          <div class="panel panel--top panel--light"><img src="media/logos/rainbow.svg" alt="레인보우로보틱스 로고" loading="lazy"></div>
+          <h3>레인보우로보틱스</h3>
+        </a>
+        <a class="card card--row card--open span-2" href="https://www.yaskawa.co.kr/" target="_blank" rel="noopener">
+          <div class="panel panel--top panel--light"><img src="media/logos/yaskawa.svg" alt="야스카와 로고" loading="lazy"></div>
+          <h3>야스카와</h3>
+          <p>가상 시험 기종: NEX20 (상자 쌓기)</p>
+        </a>
+        <a class="card card--row card--open span-2" href="https://www.ia.omron.co.kr/" target="_blank" rel="noopener">
+          <div class="panel panel--top panel--light"><img src="media/logos/omron.svg" alt="오므론 로고" loading="lazy"></div>
+          <h3>오므론</h3>
+        </a>
+        <a class="card card--row card--open span-2" href="https://www.universal-robots.com/ko/products/" target="_blank" rel="noopener">
+          <div class="panel panel--top panel--light"><img src="media/logos/ur.svg" alt="유니버설로봇 로고" loading="lazy"></div>
+          <h3>유니버설로봇</h3>
+          <p>가상 시험 기종: UR10 (외관 검사, 부품 꺼내기)</p>
+        </a>
+        <a class="card card--row card--open span-2" href="https://www.tm-robot.com/ko/product/tm-ai-cobot-series" target="_blank" rel="noopener">
+          <div class="panel panel--top"><img src="media/logos/techman.png" alt="테크맨로봇 로고" loading="lazy"></div>
+          <h3>테크맨로봇</h3>
+        </a>
+        <a class="card card--row card--open span-2" href="https://www.fkc.co.kr/" target="_blank" rel="noopener">
+          <div class="panel panel--top panel--light"><img src="media/logos/fanuc.svg" alt="한국화낙 로고" loading="lazy"></div>
           <h3>한국화낙</h3>
-          <p>가상 시험에 쓴 기종은 CRX-10iA/L (소재 넣기 장면)입니다.</p>
-          <div class="panel"><img src="media/logos/fanuc.svg" alt="한국화낙 로고" loading="lazy"></div>
+          <p>가상 시험 기종: CRX-10iA/L (소재 넣기)</p>
         </a>
-        <a class="card card--row card--open span-3" href="https://www.hanwharobotics.co.kr/kr/product/cobot?menuSeq=2" target="_blank" rel="noopener">
+        <a class="card card--row card--open span-2" href="https://www.hanwharobotics.co.kr/kr/product/cobot?menuSeq=2" target="_blank" rel="noopener">
+          <div class="panel panel--top panel--light"><img src="media/logos/hanwha_light.svg" alt="한화로보틱스 로고" loading="lazy"></div>
           <h3>한화로보틱스</h3>
-          <p>가상 시험에는 쓰지 않았습니다.</p>
-          <div class="panel"><img src="media/logos/hanwha.svg" alt="한화로보틱스 로고" loading="lazy"></div>
+        </a>
+        <a class="card card--row card--open span-2" href="https://www.abb.com/global/en/areas/robotics" target="_blank" rel="noopener">
+          <div class="panel panel--top panel--light"><img src="media/logos/abb.svg" alt="ABB 로고" loading="lazy"></div>
+          <h3>ABB</h3>
+        </a>
+        <a class="card card--row card--open span-2" href="https://www.hd-hyundairobotics.com/biz/hdc" target="_blank" rel="noopener">
+          <div class="panel panel--top panel--light"><span>HD현대로보틱스</span></div>
+          <h3>HD현대로보틱스</h3>
+        </a>
+        <a class="card card--row card--open span-2" href="https://www.kuka.com/ko-kr" target="_blank" rel="noopener">
+          <div class="panel panel--top panel--light"><img src="media/logos/kuka.svg" alt="KUKA 로고" loading="lazy"></div>
+          <h3>KUKA</h3>
         </a>
       </div>
     </div>
@@ -337,11 +428,11 @@
           <p class="t-lead">대학생 팀의 정책 제안입니다. 대구시나 대구테크노파크의 공식 사업이 아니며, 이 페이지에 적힌 기관과 협의한 내용이 아닙니다.</p>
         </div>
         <div class="faq span-6 start-7">
-          <div class="faq__item"><h3>사장님의 직접 목소리</h3><p>3공단 사장님에게 직접 들은 말이 없습니다.</p></div>
-          <div class="faq__item"><h3>기관 협의</h3><p>어느 기관과도 협의하지 못했습니다.</p></div>
-          <div class="faq__item"><h3>기존 사업이 닿는 범위</h3><p>기존 사업이 직원 네댓 명 공장에 정말 닿지 않는지는 "찾지 못했다"는 수준입니다.</p></div>
-          <div class="faq__item"><h3>실제 공장 자료</h3><p>영상과 시연은 모두 가상 공장입니다. 3공단 제품으로는 돌려 보지 않았습니다.</p></div>
-          <div class="faq__item"><h3>비용과 규모</h3><p>공장 20곳, 학생 40명, 한 해 약 2억 2,800만 원은 가정입니다.</p></div>
+          <details open><summary>사장님의 직접 목소리</summary><p>3공단 사장님에게 직접 들은 말이 없습니다.</p></details>
+          <details open><summary>기관 협의</summary><p>어느 기관과도 협의하지 못했습니다.</p></details>
+          <details open><summary>기존 사업이 닿는 범위</summary><p>기존 사업이 직원 네댓 명 공장에 정말 닿지 않는지는 "찾지 못했다"는 수준입니다.</p></details>
+          <details open><summary>실제 공장 자료</summary><p>영상과 시연은 모두 가상 공장입니다. 3공단 제품으로는 돌려 보지 않았습니다.</p></details>
+          <details open><summary>비용과 규모</summary><p>공장 20곳, 학생 40명, 한 해 약 2억 2,800만 원은 가정입니다.</p></details>
         </div>
       </div>
     </div>
@@ -366,17 +457,42 @@
         <div class="span-2 footer__col"><h3>과정</h3><ul><li><a href="#steps">네 단계</a></li><li><a href="#film">전체 영상</a></li></ul></div>
         <div class="span-2 footer__col"><h3>공장</h3><ul><li><a href="#cases">여섯 곳의 판정</a></li><li><a href="#robots">로봇 제조사</a></li></ul></div>
         <div class="span-2 footer__col"><h3>검사와 진단서</h3><ul><li><a href="#field">검사 AI</a></li><li><a href="#report">진단서 견본</a></li></ul></div>
-        <div class="span-2 footer__col"><h3>차이</h3><ul><li><a href="#diff">기존 사업과의 차이</a></li><li><a href="#unknowns">확인하지 못한 것</a></li></ul></div>
+        <div class="span-2 footer__col"><h3>차이</h3><ul><li><a href="#diff">기존 사업과의 차이</a></li><li><a href="#spread">대구로 넓히기</a></li><li><a href="#unknowns">확인하지 못한 것</a></li></ul></div>
       </div>
       <div class="footer__legal">
         <span>&copy; 2026 3공단 AI 첫걸음: 피지컬 AI 현장 트랙. 2026 대구 대학(원) AI 드래프톤 정책 제안이며 대구시나 대구테크노파크의 공식 사업이 아닙니다.</span>
         <div class="socials"></div>
-        <p class="credits">영상과 그림은 NVIDIA Isaac Sim 6.2로 만든 시뮬레이션이고 실제 업체나 도입 사례가 아닙니다. 평균 4.3명은 대구제3산업단지관리공단 2026년 전수조사, 80.7%는 중소기업중앙회 2024년 조사(300개사, 보도), 10인 이상은 고용노동부 2026년 시행지침입니다. 제품 이름과 로고는 각 회사의 상표입니다.</p>
+        <p class="credits">Yaskawa 로고는 Wikimedia Commons의 파일(CC BY-SA 4.0)입니다. 영상과 그림은 NVIDIA Isaac Sim 6.2로 만든 시뮬레이션이고 실제 업체나 도입 사례가 아닙니다. 평균 4.3명은 대구제3산업단지관리공단 2026년 전수조사, 80.7%는 중소기업중앙회 2024년 조사(300개사, 보도), 10인 이상은 고용노동부 2026년 시행지침입니다. 제품 이름과 로고는 각 회사의 상표입니다.</p>
       </div>
     </div>
   </div>
 </footer>
 
+<nav class="actionbar" aria-label="빠른 실행">
+  <a class="btn btn--primary" href="#film">전체 영상 보기</a>
+</nav>
+
+<script>
+// 넓히기 그림: 단추를 누르면 3공단 한 곳과 대구 전체를 오간다. 처음 화면에 들어올 때 한 번만 스스로 넓어진다
+(() => {
+  const fig = document.querySelector('.spread'); if (!fig) return;
+  const btns = [...document.querySelectorAll('.spread-toggle button')], num = document.getElementById('spread-n'), cap = document.getElementById('spread-cap');
+  const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let raf = 0, auto = !still;
+  function set(s) {
+    fig.dataset.state = s; cap.textContent = cap.dataset[s];
+    btns.forEach(b => b.setAttribute('aria-pressed', b.dataset.state === s));
+    cancelAnimationFrame(raf);
+    const from = +num.dataset.v, to = +num.dataset[s], t0 = performance.now();
+    const show = v => { num.dataset.v = v; num.textContent = v.toLocaleString('ko-KR'); };
+    if (still) return show(to);
+    const step = t => { const k = Math.min(1, (t - t0) / 900); show(Math.round(from + (to - from) * (1 - Math.pow(1 - k, 3)))); if (k < 1) raf = requestAnimationFrame(step); };
+    raf = requestAnimationFrame(step);
+  }
+  btns.forEach(b => b.addEventListener('click', () => { auto = false; set(b.dataset.state); }));
+  new IntersectionObserver((es, io) => { if (es[0].isIntersecting) { io.disconnect(); setTimeout(() => auto && set('b'), 800); } }, { threshold: .6 }).observe(fig);
+})();
+</script>
 <script type="module" src="assets/system.js"></script>
 <script type="module" src="assets/motion/motion.js"></script>
 <script type="module" src="assets/layout/layout.js"></script>

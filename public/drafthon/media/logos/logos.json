@@ -1,6 +1,86 @@
 [
- {"name": "뉴로메카", "file": "neuromeka.png", "url": "https://www.neuromeka.com/robot", "used": "OPTi3 (용접 장면)", "ground": "dark"},
- {"name": "두산로보틱스", "file": "doosan.svg", "url": "https://www.doosanrobotics.com/kr/product-solutions/heritage/cobot/", "used": null, "ground": "dark"},
- {"name": "한국화낙", "file": "fanuc.svg", "url": "https://www.fkc.co.kr/", "used": "CRX-10iA/L (소재 넣기 장면)", "ground": "dark"},
- {"name": "한화로보틱스", "file": "hanwha.svg", "url": "https://www.hanwharobotics.co.kr/kr/product/cobot?menuSeq=2", "used": null, "ground": "dark"}
+ {
+  "name": "뉴로메카",
+  "file": "neuromeka.png",
+  "url": "https://www.neuromeka.com/robot",
+  "used": "OPTi3 (용접)",
+  "ground": "dark"
+ },
+ {
+  "name": "두산로보틱스",
+  "file": "doosan.svg",
+  "url": "https://www.doosanrobotics.com/kr/product-solutions/heritage/cobot/",
+  "used": null,
+  "ground": "light"
+ },
+ {
+  "name": "레인보우로보틱스",
+  "file": "rainbow.svg",
+  "url": "https://rainbow-robotics.com/%EC%A0%9C%ED%92%88%EC%86%94%EB%A3%A8%EC%85%98/%ED%98%91%EB%8F%99%EB%A1%9C%EB%B4%87/rb-series/",
+  "used": null,
+  "ground": "light"
+ },
+ {
+  "name": "야스카와",
+  "file": "yaskawa.svg",
+  "url": "https://www.yaskawa.co.kr/",
+  "used": "NEX20 (상자 쌓기)",
+  "ground": "light"
+ },
+ {
+  "name": "오므론",
+  "file": "omron.svg",
+  "url": "https://www.ia.omron.co.kr/",
+  "used": null,
+  "ground": "light"
+ },
+ {
+  "name": "유니버설로봇",
+  "file": "ur.svg",
+  "url": "https://www.universal-robots.com/ko/products/",
+  "used": "UR10 (외관 검사, 부품 꺼내기)",
+  "ground": "light"
+ },
+ {
+  "name": "테크맨로봇",
+  "file": "techman.png",
+  "url": "https://www.tm-robot.com/ko/product/tm-ai-cobot-series",
+  "used": null,
+  "ground": "dark"
+ },
+ {
+  "name": "한국화낙",
+  "file": "fanuc.svg",
+  "url": "https://www.fkc.co.kr/",
+  "used": "CRX-10iA/L (소재 넣기)",
+  "ground": "light"
+ },
+ {
+  "name": "한화로보틱스",
+  "file": "hanwha_light.svg",
+  "url": "https://www.hanwharobotics.co.kr/kr/product/cobot?menuSeq=2",
+  "used": null,
+  "ground": "light"
+ },
+ {
+  "name": "ABB",
+  "file": "abb.svg",
+  "url": "https://www.abb.com/global/en/areas/robotics",
+  "used": null,
+  "ground": "light"
+ },
+ {
+  "name": "HD현대로보틱스",
+  "file": null,
+  "url": "https://www.hd-hyundairobotics.com/biz/hdc",
+  "used": null,
+  "ground": "light"
+ },
+ {
+  "name": "KUKA",
+  "file": "kuka.svg",
+  "url": "https://www.kuka.com/ko-kr",
+  "used": null,
+  "ground": "light"
+ }
 ]
