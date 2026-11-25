@@ -1,0 +1,6 @@
+[
+ {"name": "뉴로메카", "file": "neuromeka.png", "url": "https://www.neuromeka.com/robot", "used": "OPTi3 (용접 장면)", "ground": "dark"},
+ {"name": "두산로보틱스", "file": "doosan.svg", "url": "https://www.doosanrobotics.com/kr/product-solutions/heritage/cobot/", "used": null, "ground": "dark"},
+ {"name": "한국화낙", "file": "fanuc.svg", "url": "https://www.fkc.co.kr/", "used": "CRX-10iA/L (소재 넣기 장면)", "ground": "dark"},
+ {"name": "한화로보틱스", "file": "hanwha.svg", "url": "https://www.hanwharobotics.co.kr/kr/product/cobot?menuSeq=2", "used": null, "ground": "dark"}
+]

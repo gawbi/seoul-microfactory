@@ -8,6 +8,7 @@ media-src/**/originals/
 
 # Isaac Sim 출력물 (프레임, 로그). 최종 결과만 public/assets/simulation/으로 복사한다.
 sim/output/*
+sim/output_factory/
 # 다시 학습한 Go2 보행 정책(작은 TorchScript 파일)만 저장소에 둔다
 !sim/output/policies/
 sim/output/policies/*
@@ -19,3 +20,15 @@ sim/output/policies/go2_upright/*
 # 개인 설정 문서
 claude_setup.md
 __pycache__/
+
+# 드래프톤 시연 영상·스틸 (용량 때문에 제외)
+drafthon/media/
+
+# 진단서 생성 스크립트용 가상환경
+drafthon/.venv/
+drafthon/demo/.venv/
+drafthon/demo/data/*/_work/
+
+# 팀 공유용 zip (커밋하지 않음)
+share/
+.taste-skill/
