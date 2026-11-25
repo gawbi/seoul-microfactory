@@ -5,11 +5,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>3공단 AI 첫걸음: 작은 공장을 위한 8주 AI 현장 트랙</title>
-<meta name="description" content="대학생 두 명이 8주 동안 대구 제3산업단지의 작은 공장에서 문제 하나를 가상과 현장으로 재 보고 정부 지원사업으로 잇는 정책 제안입니다.">
+<title>불량을 찾아 골라내는 AI 로봇, 사기 전에 대학생이 8주 먼저 재 봅니다</title>
+<meta name="description" content="작은 절삭가공 공장이 완성품의 불량을 AI가 찾고 로봇이 골라내게 할 수 있는지, 대학생 두 명이 책임 엔지니어와 8주 동안 따져 보는 정책 제안입니다.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="3공단 AI 첫걸음: 작은 공장을 위한 8주 AI 현장 트랙">
-<meta property="og:description" content="아직 못 정한 작은 공장을 대학생이 찾아가 8주 동안 직접 재 봅니다. 2026 대구 대학(원) AI 드래프톤 정책 제안.">
+<meta property="og:title" content="불량을 찾아 골라내는 AI 로봇, 사기 전에 대학생이 8주 먼저 재 봅니다">
+<meta property="og:description" content="불량을 찾는 눈은 현장에서 8주, 골라내는 로봇 팔은 Isaac Sim에서 먼저. 2026 대구 대학(원) AI 드래프톤 정책 제안.">
 <meta property="og:image" content="share.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -53,6 +53,7 @@
 <!-- 페이지 CSS: 한글 줄바꿈, 그림 안쪽, 카드 묶음의 패널 높이만 -->
 <style>
   body { word-break: keep-all; }
+  #hero-h { font-size: clamp(32px, 3.4vw, 50px); text-wrap: balance; }
   .menu-card .panel { --p-h: 200px; }
   #film .frame { --ratio: 56.25%; background: #15191d; }
   #film .frame > video.frame__img { object-fit: contain; }
@@ -106,7 +107,7 @@
 <header class="nav">
   <div class="wrap nav__bar">
     <a class="skip-link" href="#top">본문으로 건너뛰기</a>
-    <a class="nav__logo" href="#top"><span class="mark" data-mark="stack" aria-hidden="true"></span>3공단 AI 첫걸음</a>
+    <a class="nav__logo" href="#top"><span class="mark" data-mark="stack" aria-hidden="true"></span>불량 골라내는 AI 로봇</a>
     <nav class="nav__links" aria-label="주 메뉴">
       <div class="nav__item"><a class="nav__link" href="#steps">과정</a></div>
       <div class="nav__item">
@@ -147,11 +148,11 @@
 
 <main id="top">
   <section class="hero hero--photo" data-enter data-calm="left" aria-labelledby="hero-h">
-    <img class="hero__bg" src="media/hero.jpg" alt="가공기 안으로 팔을 넣어 소재를 넣는 흰색 협동로봇" width="1920" height="1080" style="--ly-pos: 70% 50%; --ly-pos-phone: 68% 50%" fetchpriority="high">
+    <img class="hero__bg" src="media/hero.jpg" alt="검사 카메라 아래에서 부품을 집어 정상은 초록 통에, 불량은 빨간 통에 나눠 담는 로봇" width="1920" height="1080" style="--ly-pos: 70% 50%; --ly-pos-phone: 68% 50%" fetchpriority="high">
     <div class="wrap"><div class="hero-text">
       <div class="hero__text">
-        <h1 id="hero-h">작은 공장을 위한 8주 AI 현장 트랙</h1>
-        <p class="hero__lead">책임 엔지니어가 고른 문제 하나를 대학생 두 명이 8주 동안 가상과 현장에서 재 보고, 값을 하면 정부 지원사업으로 잇습니다. 화면은 모두 Isaac Sim으로 만든 가상 공장입니다.</p>
+        <h1 id="hero-h">불량을 찾아 골라내는 AI 로봇, 사기 전에 대학생이 8주 먼저 재 봅니다</h1>
+        <p class="hero__lead">작은 절삭가공 공장이 완성품의 긁힘과 찍힘을 AI가 찾고 로봇이 골라내게 할 수 있는지, 대학생 두 명이 책임 엔지니어와 따져 봅니다. 찾는 눈은 현장에서 8주, 골라내는 팔은 Isaac Sim에서 먼저 시험합니다. 화면은 모두 가상 공장입니다.</p>
         <div class="btn-row"><a class="btn btn--primary" href="#film">전체 영상 보기<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a><a class="btn btn--secondary" href="#cases">여섯 공장 보기</a></div>
       </div>
     </div></div>
@@ -451,7 +452,7 @@
     <div class="closing__links">
       <div class="grid">
         <div class="span-4 stack-4">
-          <a class="nav__logo" href="#top"><span class="mark" data-mark="stack" aria-hidden="true"></span>3공단 AI 첫걸음</a>
+          <a class="nav__logo" href="#top"><span class="mark" data-mark="stack" aria-hidden="true"></span>불량 골라내는 AI 로봇</a>
           <p class="footer__lede">대학생 팀이 낸 정책 제안입니다</p>
         </div>
         <div class="span-2 footer__col"><h3>과정</h3><ul><li><a href="#steps">네 단계</a></li><li><a href="#film">전체 영상</a></li></ul></div>
@@ -460,7 +461,7 @@
         <div class="span-2 footer__col"><h3>차이</h3><ul><li><a href="#diff">기존 사업과의 차이</a></li><li><a href="#spread">대구로 넓히기</a></li><li><a href="#unknowns">확인하지 못한 것</a></li></ul></div>
       </div>
       <div class="footer__legal">
-        <span>&copy; 2026 3공단 AI 첫걸음: 피지컬 AI 현장 트랙. 2026 대구 대학(원) AI 드래프톤 정책 제안이며 대구시나 대구테크노파크의 공식 사업이 아닙니다.</span>
+        <span>&copy; 2026 불량을 찾아 골라내는 AI 로봇, 사기 전에 대학생이 8주 먼저 재 봅니다. 2026 대구 대학(원) AI 드래프톤 정책 제안이며 대구시나 대구테크노파크의 공식 사업이 아닙니다.</span>
         <div class="socials"></div>
         <p class="credits">Yaskawa 로고는 Wikimedia Commons의 파일(CC BY-SA 4.0)입니다. 영상과 그림은 NVIDIA Isaac Sim 6.2로 만든 시뮬레이션이고 실제 업체나 도입 사례가 아닙니다. 평균 4.3명은 대구제3산업단지관리공단 2026년 전수조사, 80.7%는 중소기업중앙회 2024년 조사(300개사, 보도), 10인 이상은 고용노동부 2026년 시행지침입니다. 제품 이름과 로고는 각 회사의 상표입니다.</p>
       </div>
